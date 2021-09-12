@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       {/* <JoinDemo></JoinDemo> */}
-      <BaiTapTongHop></BaiTapTongHop>
+      {/* <BaiTapTongHop></BaiTapTongHop> */}
     </div>
   );
 }
