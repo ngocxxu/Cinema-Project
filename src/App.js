@@ -1,6 +1,4 @@
 import "./App.css";
-import BaiTapTongHop from "./BaiTapTongHop/BaiTapTongHop";
-import JoinDemo from "./Lodash/JoinDemo";
 
 function App() {
   return (
