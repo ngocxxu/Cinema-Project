@@ -110,7 +110,7 @@ export default function Detail(props) {
                                     {cumRap.tenCumRap}
                                   </p>
                                   <p className="text-gray-500">
-                                    {cumRap.tenCumRap}
+                                    {cumRap.diaChi}
                                   </p>
                                 </div>
                               </div>
