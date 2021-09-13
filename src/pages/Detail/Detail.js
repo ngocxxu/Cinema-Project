@@ -3,6 +3,9 @@ import { Button } from "@tsamantanis/react-glassmorphism";
 import { CustomCard } from "@tsamantanis/react-glassmorphism";
 import "@tsamantanis/react-glassmorphism/dist/index.css";
 import "../../assets/styles/circle.css";
+import { Tabs, Radio, Space } from "antd";
+
+const { TabPane } = Tabs;
 
 export default function Detail(props) {
   return (
@@ -36,6 +39,19 @@ export default function Detail(props) {
               </div>
             </div>
           </div>
+        </div>
+        <div className="mt-20 container mx-auto">
+          <Tabs tabPosition={"left"}>
+            <TabPane tab="Tab 1" key="1">
+              Content of Tab 1
+            </TabPane>
+            <TabPane tab="Tab 2" key="2">
+              Content of Tab 2
+            </TabPane>
+            <TabPane tab="Tab 3" key="3">
+              Content of Tab 3
+            </TabPane>
+          </Tabs>
         </div>
       </CustomCard>
     </div>
