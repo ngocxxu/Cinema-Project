@@ -6,10 +6,12 @@ import Film from '../../components/Films/Film';
 import MultipleRowSlickkk from '../../components/ReactSlick/MultipleRowSlickkk';
 import MultipleRowSlick from '../../components/ReactSlick/MultipleRowSlick';
 import { layDanhSachPhimAction } from '../../redux/actions/QuanLyPhimAction';
+import { layDanhSachHeThongRapAction } from '../../redux/actions/QuanLyRapAction';
 
 export default function Home(props) {
 
     const { arrFilm } = useSelector(state => state.QuanLyPhimReducer);
+    const {heThongRapChieu} = useSelector(state => state.QuanLyRapReducer)
     const dispatch = useDispatch();
 
     // props.match.params
@@ -22,6 +24,7 @@ export default function Home(props) {
     useEffect(()=>{
         //dispatch function từ thunk
         dispatch(layDanhSachPhimAction())
+        dispatch(layDanhSachHeThongRapAction())
     },[])
     
     return (
@@ -29,14 +32,10 @@ export default function Home(props) {
             <section className="text-gray-600 body-font" >
                 <div className="container px-5 py-24 mx-auto " >
                 <MultipleRowSlickkk arrFilm={arrFilm}></MultipleRowSlickkk>
-                    {/* <MultipleRowSlick  arrFilm={arrFilm}></MultipleRowSlick> */}
-                    {/* <div className="flex flex-wrap  " style={{ justifyContent: 'center' }}>
-                        {renderFilms()}
-                    </div> */}
                 </div>
             </section>
             <div className="mx-36">
-                <HomeMenu  />
+                <HomeMenu heThongRapChieu={heThongRapChieu} />
             </div>
         </div>
     )
