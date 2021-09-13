@@ -1,8 +1,20 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import _ from "lodash";
 
 export default function Footer(props) {
+  const dispatch = useDispatch();
+  const { heThongRapChieu } = useSelector((state) => state.QuanLyRapReducer);
+
+  const arrHeThongRap = _.map(heThongRapChieu, (heThongRap) =>
+    _.pick(heThongRap, ["maHeThongRap", "tenHeThongRap", "logo"])
+  );
+
   return (
-    <footer className="mt-20 py-6 bg-coolGray-100 text-coolGray-900 text-white" style={{backgroundColor:'#00796b'}}>
+    <footer
+      className="mt-20 py-6 bg-coolGray-100 text-coolGray-900 text-white"
+      style={{ backgroundColor: "#00796b" }}
+    >
       <div className="container px-6 mx-auto space-y-6 divide-y divide-gray-400 md:space-y-12 divide-opacity-50">
         <div className="grid grid-cols-12">
           <div className="pb-6 col-span-full md:pb-0 md:col-span-6">
@@ -27,38 +39,21 @@ export default function Footer(props) {
           </div>
           <div className="col-span-6 text-center md:text-left md:col-span-3">
             <p className="pb-1 text-lg font-medium">Category</p>
-            <ul>
-              <li>
-                <a href="#" className="hover:text-violet-600 text-white">
-                  Link
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-violet-600 text-white">
-                  Link
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-violet-600 text-white">
-                  Link
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-violet-600 text-white">
-                  Link
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-violet-600 text-white">
-                  Link
-                </a>
-              </li>
-            </ul>
+            <div className="flex flex-wrap w-1/2 ">
+              {arrHeThongRap.map((htr, index) => {
+                return (
+                  <div className="m-1 " key={index}>
+                    <img width='50' src={htr.logo} className="hover:text-violet-600 text-white">
+                    </img>
+                  </div>
+                );
+              })}
+            </div>
           </div>
           <div className="col-span-6 text-center md:text-left md:col-span-3">
             <p className="pb-1 text-lg font-medium">Category</p>
             <ul>
-            <li>
+              <li>
                 <a href="#" className="hover:text-violet-600 text-white">
                   Link
                 </a>
