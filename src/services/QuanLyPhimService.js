@@ -1,3 +1,4 @@
+import { GROUPID } from "../util/setting/config";
 import { baseService } from "./baseService";
 
 export class QuanLyPhimService extends baseService {
@@ -8,6 +9,10 @@ export class QuanLyPhimService extends baseService {
   layDanhSachBanner = ()=>{
     //trả về promise
     return this.get(`/api/QuanLyPhim/LayDanhSachBanner`)
+  }
+  layDanhSachPhim = ()=>{
+    //trả về promise
+    return this.get(`/api/QuanLyPhim/LayDanhSachPhim?maNhom=${GROUPID}`)
   }
 }
 
