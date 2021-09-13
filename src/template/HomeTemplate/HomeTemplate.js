@@ -13,7 +13,6 @@ export default function HomeTemplate(props) {
       return <Fragment>
         {/* //thành phần dùng chung */}
         <Header {...propsRoute}></Header>
-        <HomeCarousel {...propsRoute}></HomeCarousel>
         <Component {...propsRoute}></Component>
         <Footer {...propsRoute}></Footer>
       </Fragment>

@@ -9,6 +9,7 @@ import Contact from "./pages/Contact/Contact";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import News from "./pages/News/News";
+import Detail from "./pages/Detail/Detail";
 export const history = createBrowserHistory();
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <HomeTemplate path="/home" exact Component={Home}></HomeTemplate>
         <HomeTemplate path="/contact" exact Component={Contact}></HomeTemplate>
         <HomeTemplate path="/news" exact Component={News}></HomeTemplate>
+        <HomeTemplate path="/detail/:id" exact Component={Detail}></HomeTemplate>
         <Router path="/login" exact Component={Login}></Router>
         <Router path="/register" exact Component={Register}></Router>
       </Switch>
