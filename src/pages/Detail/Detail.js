@@ -1,17 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@tsamantanis/react-glassmorphism";
 import { CustomCard } from "@tsamantanis/react-glassmorphism";
 import "@tsamantanis/react-glassmorphism/dist/index.css";
 import "../../assets/styles/circle.css";
 import { Tabs, Radio, Space } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { SET_CHI_TIET_PHIM } from "../../redux/const/settingConst";
+import { layThongTinChiTietPhimAction } from "../../redux/actions/QuanLyRapAction";
+import moment from "moment";
 
 const { TabPane } = Tabs;
 
 export default function Detail(props) {
+
+  const {filmDetail} = useSelector(state => state.QuanLyPhimReducer)
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    //lấy thông tin param từ url
+    //bóc tách giá trị id từ url
+    let {id} = props.match.params;
+    dispatch(layThongTinChiTietPhimAction(id))
+  }, [])
+
   return (
     <div
       className="bg-no-repeat bg-cover bg-center"
-      style={{ backgroundImage: "url(https://picsum.photos/1000)" }}
+      style={{ backgroundImage: `url(${filmDetail.hinhAnh})`,minHeight:'100vh' }}
     >
       <CustomCard
         className="min-h-screen"
@@ -20,24 +35,27 @@ export default function Detail(props) {
         blur={20} // default blur value is 10px
         borderRadius={0} // default border radius value is 10px
       >
-        <div className="grid grid-cols-12">
-          <div className="col-span-4 col-start-4">
-            <div className="grid grid-cols-2">
-              <img src="https://picsum.photos/200/350" alt="..."></img>
-              <div>
-                <p>Film Name</p>
-                <p>Description</p>
+        <div className="grid grid-cols-12 my-20">
+          <div className="col-span-5 col-start-3">
+            <div className="grid grid-cols-3">
+              <img className='col-span-1' src={filmDetail.hinhAnh} alt={filmDetail.hinhAnh}></img>
+              <div  className='col-span-2 ml-5'>
+              <p className='' >Opening day: {moment(filmDetail.ngayKhoiChieu).format('DD/MM/YYYY')}</p>
+                <p className='text-3xl'>{filmDetail.tenPhim}</p>
+                <p className='text-xl' >Description</p>
+                <p>{filmDetail.moTa}</p>
               </div>
             </div>
           </div>
           <div className="col-span-4 ">
-            <div className="c100 p50 big">
-              <span>50%</span>
+            <div className={`c100 p${filmDetail.danhGia*10} big`}>
+              <span className='text-white'>{filmDetail.danhGia*10}%</span>
               <div className="slice">
                 <div className="bar" />
                 <div className="fill" />
               </div>
             </div>
+            
           </div>
         </div>
         <div className="mt-20 container mx-auto">
