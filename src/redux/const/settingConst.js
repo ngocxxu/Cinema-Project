@@ -6,3 +6,4 @@ export const SET_DANH_SACH_PHIM = 'SET_DANH_SACH_PHIM';
 export const SET_CHI_TIET_PHIM = 'SET_CHI_TIET_PHIM';
 export const DANG_NHAP_ACTION = 'DANG_NHAP_ACTION';
 export const SET_CHI_TIET_PHONG_VE = 'SET_CHI_TIET_PHONG_VE';
+export const DAT_VE = 'DAT_VE';
