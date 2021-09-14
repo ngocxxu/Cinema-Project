@@ -12,10 +12,12 @@ import News from "./pages/News/News";
 import Detail from "./pages/Detail/Detail";
 import Checkout from "./pages/Checkout/Checkout";
 import { Suspense,lazy } from "react";
+import CheckoutTemplate from "./template/CheckoutTemplate/CheckoutTemplate";
+import UserTemplate from "./template/UserTemplate/UserTemplate";
 
 //delay load trang cho html để giao diện hiện ra full, giống như delay api
 //lấy CheckoutTemplateLazy bọc CheckoutTemplate
-const CheckoutTemplateLazy = lazy(()=> import('./template/CheckoutTemplate/CheckoutTemplate'))
+// const CheckoutTemplateLazy = lazy(()=> import('./template/CheckoutTemplate/CheckoutTemplate'))
 
 export const history = createBrowserHistory();
 
@@ -28,11 +30,13 @@ function App() {
         <HomeTemplate path="/contact" exact Component={Contact}></HomeTemplate>
         <HomeTemplate path="/news" exact Component={News}></HomeTemplate>
         <HomeTemplate path="/detail/:id" exact Component={Detail}></HomeTemplate>
-        <Router path="/login" exact Component={Login}></Router>
         <Router path="/register" exact Component={Register}></Router>
-        <Suspense fallback={<h1>LOADING...</h1>}>
+        <CheckoutTemplate path="/checkout/:id" exact Component={Checkout}></CheckoutTemplate>
+        <UserTemplate path="/login" exact Component={Login}></UserTemplate>
+
+        {/* <Suspense fallback={<h1>LOADING...</h1>}>
         <CheckoutTemplateLazy path="/checkout/:id" exact Component={Checkout}></CheckoutTemplateLazy>
-        </Suspense>
+        </Suspense> */}
       </Switch>
     </Router>
   );

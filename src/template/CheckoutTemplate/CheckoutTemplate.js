@@ -6,9 +6,9 @@ export default function CheckoutTemplate(props) {
   const { Component, ...restRoute } = props;
 
   //nếu localStorage ko có thì chuyển user về trang login
-  // if(!localStorage.getItem(USER_LOGIN)){
-  //   return <Redirect to='/login'></Redirect>
-  // }
+  if(!localStorage.getItem(USER_LOGIN)){
+    return <Redirect to='/login'></Redirect>
+  }
 
   return (
     <Route
