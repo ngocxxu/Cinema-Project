@@ -1,11 +1,15 @@
 import React, { Fragment, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { layChiTietPhongVeAction } from "../../redux/actions/QuanLyDatVeAction";
+import {
+  datVeAction,
+  layChiTietPhongVeAction,
+} from "../../redux/actions/QuanLyDatVeAction";
 import style from "./Checkout.module.css";
 import "./Checkout.css";
-import { CloseOutlined } from "@ant-design/icons";
+import { CloseOutlined, UserOutlined,SmileOutlined } from "@ant-design/icons";
 import { DAT_VE } from "../../redux/const/settingConst";
 import _ from "lodash";
+import { ThongTinDatVe } from "../../_core/models/ThongTinDatVe";
 
 export default function Checkout(props) {
   const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
@@ -26,11 +30,18 @@ export default function Checkout(props) {
       let classGheVip = ghe.loaiGhe === "Vip" ? "gheVip" : "";
       let classGheDaDat = ghe.daDat === true ? "gheDaDat" : "";
       let classGheDangDat = "";
+      // console.log('ghe',ghe)
       //tìm ra giá trị index, sau khi render ra, ta ktra ghe.maGhe có =` với gheDD.maGhe
       //mình chọn vô ghế đó thì maGhe sẽ dc gửi lên redux, ghế đó có trog mảng danhSachGheDangDat. Và sau khi render, nó sẽ ktra ghế sau khi render có trùng với mã ghế ta chọn trc đó hay ko
       let indexGheDD = danhSachGheDangDat.findIndex(
         (gheDD) => gheDD.maGhe === ghe.maGhe
       );
+
+      let classGheDaDuocDat = "";
+      if (userLogin.taiKhoan === ghe.taiKhoanNguoiDat) {
+        classGheDaDuocDat = "gheDaDuocDat";
+      }
+
       if (indexGheDD !== -1) {
         classGheDangDat = "gheDangDat";
       }
@@ -45,10 +56,14 @@ export default function Checkout(props) {
               });
             }}
             disabled={ghe.daDat}
-            className={`ghe ${classGheVip} ${classGheDaDat} ${classGheDangDat}`}
+            className={`ghe ${classGheVip} ${classGheDaDat} ${classGheDangDat} ${classGheDangDat}`}
           >
             {ghe.daDat === true ? (
-              <CloseOutlined className="mb-1 font-semibold" />
+              classGheDaDuocDat !== "" ? (
+                <UserOutlined className="mb-1 font-semibold" />
+              ) : (
+                <CloseOutlined className="mb-1 font-semibold" />
+              )
             ) : (
               ghe.stt
             )}
@@ -70,9 +85,46 @@ export default function Checkout(props) {
             </div>
             <div>{renderSeats()}</div>
           </div>
+          <div className="mt-5 flex justify-center ">
+            <table
+              className="min-w-full divide-y divide-gray-200 w-2/3"
+              style={{ border: "none" }}
+            >
+              <thead className="bg-gray-50 p-5">
+                <tr>
+                  <th>Unseat</th>
+                  <th>Seating</th>
+                  <th>Seat VIP</th>
+                  <th>Seated</th>
+                  <th>Self-Seated</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200 bg-white">
+                <tr>
+                  <td>
+                    <button className="ghe text-center"><SmileOutlined /></button>
+                  </td>
+                  <td>
+                    <button className="ghe gheDangDat text-center"><SmileOutlined /></button>
+                  </td>
+                  <td>
+                    <button className="ghe gheVip text-center"><SmileOutlined /></button>
+                  </td>
+                  <td>
+                    <button className="ghe gheDaDat text-center"><SmileOutlined /></button>
+                  </td>
+                  <td>
+                    <button className="ghe gheDaDuocDat text-center"><SmileOutlined /></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div className="col-span-3">
-          <h3 className="text-center text-2xl text-green-600">Booking Information</h3>
+          <h3 className="text-center text-2xl text-green-600">
+            Booking Information
+          </h3>
           <hr />
           <h3 className="text-xl">{thongTinPhim?.tenPhim}</h3>
           <p>Location: {thongTinPhim?.diaChi}</p>
@@ -129,7 +181,16 @@ export default function Checkout(props) {
             <br />
             {userLogin.soDT}
           </div>
-          <div className="mt-10 bg-green-500 text-white w-full text-center p-4 rounded hover:bg-green-600 cursor-pointer">
+          <div
+            onClick={() => {
+              const thongTinDatVe = new ThongTinDatVe();
+              thongTinDatVe.maLichChieu = props.match.params.id;
+              thongTinDatVe.danhSachVe = danhSachGheDangDat;
+              console.log("thongTinDatVe", thongTinDatVe);
+              dispatch(datVeAction(thongTinDatVe));
+            }}
+            className="mt-10 bg-green-500 text-white w-full text-center p-4 rounded hover:bg-green-600 cursor-pointer"
+          >
             Booking Ticket
           </div>
         </div>

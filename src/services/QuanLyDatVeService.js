@@ -1,4 +1,5 @@
 import { GROUPID } from "../util/setting/config";
+import { ThongTinDatVe } from "../_core/models/ThongTinDatVe";
 import { baseService } from "./baseService";
 
 export class QuanLyDatVeService extends baseService {
@@ -9,6 +10,9 @@ export class QuanLyDatVeService extends baseService {
   layChiTietPhongVe = (maLichChieu)=>{
     //trả về promise
     return this.get(`/api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${maLichChieu}`)
+  }
+  datVe = (thongTinDatVe = new ThongTinDatVe())=>{
+    return this.post(`/api/QuanLyDatVe/DatVe`,thongTinDatVe)
   }
 }
 

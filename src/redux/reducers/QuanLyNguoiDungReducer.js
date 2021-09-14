@@ -22,7 +22,7 @@ export const QuanLyNguoiDungReducer = (state = initialState, action) => {
       localStorage.setItem(USER_LOGIN, JSON.stringify(action.thongTinDangNhap));
       //lưu Token từ ng dùng login mà ko cần phải mất thoi gian mà
       //lấy token ra và lưu ở localStorage
-      localStorage.setItem(TOKEN, JSON.stringify(action.thongTinDangNhap.accessToken))
+      localStorage.setItem(TOKEN, action.thongTinDangNhap.accessToken)
       return { ...state, userLogin: action.thongTinDangNhap};
 
       default: return { ...state };
