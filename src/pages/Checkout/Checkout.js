@@ -8,7 +8,11 @@ import {
 import style from "./Checkout.module.css";
 import "./Checkout.css";
 import { CloseOutlined, UserOutlined, SmileOutlined } from "@ant-design/icons";
-import { DAT_VE } from "../../redux/const/settingConst";
+import {
+  CHANGE_TAB_POSITION,
+  CHUYEN_TAB,
+  DAT_VE,
+} from "../../redux/const/settingConst";
 import _ from "lodash";
 import { ThongTinDatVe } from "../../_core/models/ThongTinDatVe";
 import { Tabs } from "antd";
@@ -216,13 +220,24 @@ function Checkout(props) {
 
 const { TabPane } = Tabs;
 
-function callback(key) {
-}
+function callback(key) {}
 
 export default function (props) {
+  const { tabActive } = useSelector((state) => state.QuanLyDatVeReducer);
+  const dispatch = useDispatch();
   return (
     <div className="p-5">
-      <Tabs defaultActiveKey="1" onChange={callback}>
+      {/* key đóng vai trò là con số để chuyển tab, chứ TabPane ko nhận sự kiện onClick */}
+      <Tabs
+        defaultActiveKey="1"
+        activeKey={tabActive.toString()}
+        onChange={(key) => {
+          dispatch({
+            type: CHANGE_TAB_POSITION,
+            number: key,
+          });
+        }}
+      >
         <TabPane tab="01 CHOOSE SEAT & PAYMENT" key="1">
           <Checkout {...props}></Checkout>
         </TabPane>
@@ -257,12 +272,18 @@ function KetQuaDatVe(props) {
               <h2 className="text-gray-900 title-font font-medium">
                 {ticket.tenPhim}
               </h2>
-              <p className="text-gray-500">Showing time: {moment(ticket.ngayDat).format('hh:mm A')} - Showing date: {moment(ticket.ngayDat).format('DD-MM-YYYY')}</p>
+              <p className="text-gray-500">
+                Showing time: {moment(ticket.ngayDat).format("hh:mm A")} -
+                Showing date: {moment(ticket.ngayDat).format("DD-MM-YYYY")}
+              </p>
               {/* first lấy ra phần tử mảng đầu tiên */}
               <p>Destination: {seats.tenHeThongRap}</p>
-              <p>Theater name: {seats.tenCumRap} - Seat: {ticket.danhSachGhe?.map((ghe,index)=>{
-                return <span>{ghe.tenGhe}</span>
-              })}</p>
+              <p>
+                Theater name: {seats.tenCumRap} - Seat:{" "}
+                {ticket.danhSachGhe?.map((ghe, index) => {
+                  return <span>{ghe.tenGhe}</span>;
+                })}
+              </p>
             </div>
           </div>
         </div>
@@ -271,7 +292,7 @@ function KetQuaDatVe(props) {
   };
   useEffect(() => {
     dispatch(layThongTinNguoiDungAction());
-  },[]);
+  }, []);
   return (
     <div className="container mx-auto p-5">
       <h3>Booking Ticket Result</h3>

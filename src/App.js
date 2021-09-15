@@ -14,6 +14,7 @@ import Checkout from "./pages/Checkout/Checkout";
 import { Suspense,lazy } from "react";
 import CheckoutTemplate from "./template/CheckoutTemplate/CheckoutTemplate";
 import UserTemplate from "./template/UserTemplate/UserTemplate";
+import Loading from "./components/Loading/Loading";
 
 //delay load trang cho html để giao diện hiện ra full, giống như delay api
 //lấy CheckoutTemplateLazy bọc CheckoutTemplate
@@ -24,6 +25,7 @@ export const history = createBrowserHistory();
 function App() {
   return (
     <Router history={history}>
+    <Loading></Loading>
       <Switch>
         <HomeTemplate path="/" exact Component={Home}></HomeTemplate>
         <HomeTemplate path="/home" exact Component={Home}></HomeTemplate>

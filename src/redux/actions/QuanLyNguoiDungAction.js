@@ -7,7 +7,6 @@ export const dangNhapAction = (thongTinDangNhap) => {
       const result = await quanLyNguoiDungService.dangNhapNguoiDung(thongTinDangNhap);
       console.log("login", result);
       if (result.status === 200) {
-        // console.log("hello")
         dispatch({
           type: DANG_NHAP_ACTION,
           thongTinDangNhap: result.data.content,
