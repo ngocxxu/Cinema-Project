@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import React, { Fragment, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -6,12 +7,16 @@ import {
 } from "../../redux/actions/QuanLyDatVeAction";
 import style from "./Checkout.module.css";
 import "./Checkout.css";
-import { CloseOutlined, UserOutlined,SmileOutlined } from "@ant-design/icons";
+import { CloseOutlined, UserOutlined, SmileOutlined } from "@ant-design/icons";
 import { DAT_VE } from "../../redux/const/settingConst";
 import _ from "lodash";
 import { ThongTinDatVe } from "../../_core/models/ThongTinDatVe";
+import { Tabs } from "antd";
+import { QuanLyNguoiDungReducer } from "../../redux/reducers/QuanLyNguoiDungReducer";
+import { layThongTinNguoiDungAction } from "../../redux/actions/QuanLyNguoiDungAction";
+import moment from "moment";
 
-export default function Checkout(props) {
+function Checkout(props) {
   const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
   const { chiTietPhongVe, danhSachGheDangDat } = useSelector(
     (state) => state.QuanLyDatVeReducer
@@ -56,7 +61,7 @@ export default function Checkout(props) {
               });
             }}
             disabled={ghe.daDat}
-            className={`ghe ${classGheVip} ${classGheDaDat} ${classGheDangDat} ${classGheDangDat}`}
+            className={`ghe ${classGheVip} ${classGheDaDat} ${classGheDangDat} ${classGheDaDuocDat}`}
           >
             {ghe.daDat === true ? (
               classGheDaDuocDat !== "" ? (
@@ -102,19 +107,29 @@ export default function Checkout(props) {
               <tbody className="divide-y divide-gray-200 bg-white">
                 <tr>
                   <td>
-                    <button className="ghe text-center"><SmileOutlined /></button>
+                    <button className="ghe text-center">
+                      <SmileOutlined />
+                    </button>
                   </td>
                   <td>
-                    <button className="ghe gheDangDat text-center"><SmileOutlined /></button>
+                    <button className="ghe gheDangDat text-center">
+                      <SmileOutlined />
+                    </button>
                   </td>
                   <td>
-                    <button className="ghe gheVip text-center"><SmileOutlined /></button>
+                    <button className="ghe gheVip text-center">
+                      <SmileOutlined />
+                    </button>
                   </td>
                   <td>
-                    <button className="ghe gheDaDat text-center"><SmileOutlined /></button>
+                    <button className="ghe gheDaDat text-center">
+                      <SmileOutlined />
+                    </button>
                   </td>
                   <td>
-                    <button className="ghe gheDaDuocDat text-center"><SmileOutlined /></button>
+                    <button className="ghe gheDaDuocDat text-center">
+                      <SmileOutlined />
+                    </button>
                   </td>
                 </tr>
               </tbody>
@@ -195,6 +210,85 @@ export default function Checkout(props) {
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+const { TabPane } = Tabs;
+
+function callback(key) {
+}
+
+export default function (props) {
+  return (
+    <div className="p-5">
+      <Tabs defaultActiveKey="1" onChange={callback}>
+        <TabPane tab="01 CHOOSE SEAT & PAYMENT" key="1">
+          <Checkout {...props}></Checkout>
+        </TabPane>
+        <TabPane tab="02 BOOKING TICKET RESULT" key="2">
+          <KetQuaDatVe {...props}></KetQuaDatVe>
+        </TabPane>
+      </Tabs>
+    </div>
+  );
+}
+
+function KetQuaDatVe(props) {
+  const { thongTinNguoiDung } = useSelector(
+    (state) => state.QuanLyNguoiDungReducer
+  );
+  const { chiTietPhongVe, danhSachGheDangDat } = props;
+
+  const dispatch = useDispatch();
+
+  const renderTicketItem = function () {
+    return thongTinNguoiDung.thongTinDatVe?.map((ticket, index) => {
+      const seats = _.first(ticket.danhSachGhe);
+      return (
+        <div className="p-2 lg:w-1/3 md:w-1/2 w-full" key={index}>
+          <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
+            <img
+              alt="team"
+              className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+              src={ticket.hinhAnh}
+            />
+            <div className="flex-grow">
+              <h2 className="text-gray-900 title-font font-medium">
+                {ticket.tenPhim}
+              </h2>
+              <p className="text-gray-500">Showing time: {moment(ticket.ngayDat).format('hh:mm A')} - Showing date: {moment(ticket.ngayDat).format('DD-MM-YYYY')}</p>
+              {/* first lấy ra phần tử mảng đầu tiên */}
+              <p>Destination: {seats.tenHeThongRap}</p>
+              <p>Theater name: {seats.tenCumRap} - Seat: {ticket.danhSachGhe?.map((ghe,index)=>{
+                return <span>{ghe.tenGhe}</span>
+              })}</p>
+            </div>
+          </div>
+        </div>
+      );
+    });
+  };
+  useEffect(() => {
+    dispatch(layThongTinNguoiDungAction());
+  },[]);
+  return (
+    <div className="container mx-auto p-5">
+      <h3>Booking Ticket Result</h3>
+      <section className="text-gray-600 body-font ">
+        <div className="container px-5 py-24 mx-auto">
+          <div className="flex flex-col text-center w-full mb-20">
+            <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-green-600">
+              Booking Ticket History
+            </h1>
+            <p className="lg:w-2/3  mx-auto leading-relaxed text-base">
+              You have successfully booked your ticket. Please carefully check
+              the information below. We will not refund under any circumstances.
+            </p>
+          </div>
+          <div className="flex flex-wrap -m-2">{renderTicketItem()}</div>
+        </div>
+      </section>
     </div>
   );
 }

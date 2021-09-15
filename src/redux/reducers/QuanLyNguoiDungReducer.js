@@ -1,10 +1,13 @@
 import { USER_LOGIN } from "../../util/setting/config";
 import { TOKEN } from "../../util/setting/config";
-import { DANG_NHAP_ACTION } from "../const/settingConst";
+import {
+  DANG_NHAP_ACTION,
+  SET_THONG_TIN_NGUOI_DUNG,
+} from "../const/settingConst";
 
-let user ={};
+let user = {};
 //trường hợp này áp dụng khi tắt máy hay tắt browser nhưng thông tin vẫn dc lưu lại
-if(localStorage.getItem(USER_LOGIN)){
+if (localStorage.getItem(USER_LOGIN)) {
   //nếu có USER_LOGIN thì nó sẽ từ string parse ra obj lại roi gán lại cho user
   //lấy user gán lại cho userLogin
   user = JSON.parse(localStorage.getItem(USER_LOGIN));
@@ -12,6 +15,7 @@ if(localStorage.getItem(USER_LOGIN)){
 
 const initialState = {
   userLogin: user,
+  thongTinNguoiDung: {},
 };
 
 export const QuanLyNguoiDungReducer = (state = initialState, action) => {
@@ -22,9 +26,14 @@ export const QuanLyNguoiDungReducer = (state = initialState, action) => {
       localStorage.setItem(USER_LOGIN, JSON.stringify(action.thongTinDangNhap));
       //lưu Token từ ng dùng login mà ko cần phải mất thoi gian mà
       //lấy token ra và lưu ở localStorage
-      localStorage.setItem(TOKEN, action.thongTinDangNhap.accessToken)
-      return { ...state, userLogin: action.thongTinDangNhap};
+      localStorage.setItem(TOKEN, action.thongTinDangNhap.accessToken);
+      return { ...state, userLogin: action.thongTinDangNhap };
 
-      default: return { ...state };
+    case SET_THONG_TIN_NGUOI_DUNG:
+      state.thongTinNguoiDung = action.thongTinNguoiDung;
+      return { ...state };
+
+    default:
+      return { ...state };
   }
 };
