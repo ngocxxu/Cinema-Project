@@ -7,7 +7,7 @@ import {
 } from "../../redux/actions/QuanLyDatVeAction";
 import style from "./Checkout.module.css";
 import "./Checkout.css";
-import { CloseOutlined, UserOutlined, SmileOutlined } from "@ant-design/icons";
+import { CloseOutlined, UserOutlined, SmileOutlined, WarningOutlined } from "@ant-design/icons";
 import {
   CHANGE_TAB_POSITION,
   CHUYEN_TAB,
@@ -22,7 +22,7 @@ import moment from "moment";
 
 function Checkout(props) {
   const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
-  const { chiTietPhongVe, danhSachGheDangDat } = useSelector(
+  const { chiTietPhongVe, danhSachGheDangDat,danhSachGheKhachDat } = useSelector(
     (state) => state.QuanLyDatVeReducer
   );
   const { thongTinPhim, danhSachGhe } = chiTietPhongVe;
@@ -40,12 +40,22 @@ function Checkout(props) {
       let classGheVip = ghe.loaiGhe === "Vip" ? "gheVip" : "";
       let classGheDaDat = ghe.daDat === true ? "gheDaDat" : "";
       let classGheDangDat = "";
+
       // console.log('ghe',ghe)
       //tìm ra giá trị index, sau khi render ra, ta ktra ghe.maGhe có =` với gheDD.maGhe
       //mình chọn vô ghế đó thì maGhe sẽ dc gửi lên redux, ghế đó có trog mảng danhSachGheDangDat. Và sau khi render, nó sẽ ktra ghế sau khi render có trùng với mã ghế ta chọn trc đó hay ko
       let indexGheDD = danhSachGheDangDat.findIndex(
         (gheDD) => gheDD.maGhe === ghe.maGhe
       );
+
+      //ktra từng ghế và render xem có phải ghế khách đặt hay ko
+      //tìm thấy dc ghế của khách trong mảng ghế đang render
+      let classGheKhachDat='';
+      let indexGheKhachDat= danhSachGheKhachDat.findIndex(gheKD=>gheKD.maGhe === ghe.maGhe)
+        if(indexGheKhachDat!==-1){
+          classGheKhachDat = 'gheKhachDat';
+        }
+
 
       let classGheDaDuocDat = "";
       if (userLogin.taiKhoan === ghe.taiKhoanNguoiDat) {
@@ -56,6 +66,8 @@ function Checkout(props) {
         classGheDangDat = "gheDangDat";
       }
 
+
+
       return (
         <Fragment key={index}>
           <button
@@ -65,8 +77,8 @@ function Checkout(props) {
                 gheDuocChon: ghe,
               });
             }}
-            disabled={ghe.daDat}
-            className={`ghe ${classGheVip} ${classGheDaDat} ${classGheDangDat} ${classGheDaDuocDat}`}
+            disabled={ghe.daDat || classGheKhachDat !== ''}
+            className={`ghe ${classGheVip} ${classGheDaDat} ${classGheDangDat} ${classGheDaDuocDat} ${classGheKhachDat}`}
           >
             {ghe.daDat === true ? (
               classGheDaDuocDat !== "" ? (
@@ -74,9 +86,8 @@ function Checkout(props) {
               ) : (
                 <CloseOutlined className="mb-1 font-semibold" />
               )
-            ) : (
-              ghe.stt
-            )}
+            ) : classGheKhachDat === '' ?(
+              ghe.stt) : <WarningOutlined className="mb-1 font-semibold"/> }
           </button>
           {(index + 1) % 16 === 0 ? <br /> : ""}
         </Fragment>
@@ -107,6 +118,7 @@ function Checkout(props) {
                   <th>Seat VIP</th>
                   <th>Seated</th>
                   <th>Self-Seated</th>
+                  <th>Someone Seating</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
@@ -133,6 +145,11 @@ function Checkout(props) {
                   </td>
                   <td>
                     <button className="ghe gheDaDuocDat text-center">
+                      <SmileOutlined />
+                    </button>
+                  </td>
+                  <td>
+                    <button className="ghe gheKhachDat text-center">
                       <SmileOutlined />
                     </button>
                   </td>

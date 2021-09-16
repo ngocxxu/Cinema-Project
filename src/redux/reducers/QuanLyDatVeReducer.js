@@ -4,7 +4,11 @@ import { CHANGE_TAB_POSITION, CHUYEN_TAB, CLEAR_THONG_TIN_DAT_VE, DAT_VE, SET_CH
 const initialState = {
   chiTietPhongVe:new ThongTinLichChieu(),
   danhSachGheDangDat:[],
-  tabActive: 1
+  tabActive: 1,
+  danhSachGheKhachDat:[
+    {maGhe:60552},
+    {maGhe:60553},
+  ]
 }
 
 export const QuanLyDatVeReducer = (state = initialState, action) => {
