@@ -3,6 +3,7 @@ import {
   CHUYEN_TAB,
   CLEAR_THONG_TIN_DAT_VE,
   DANG_NHAP_ACTION,
+  DAT_VE,
   DISPLAY_LOADING,
   HIDE_LOADING,
   SET_CHI_TIET_PHONG_VE,
@@ -10,6 +11,7 @@ import {
 import { history } from "../../App";
 import { quanLyDatVeService } from "../../services/QuanLyDatVeService";
 import { ThongTinDatVe } from "../../_core/models/ThongTinDatVe";
+import { connection } from "../../index";
 
 export const layChiTietPhongVeAction = (maLichChieu) => {
   // console.log("maLichChieuAction",maLichChieu)
@@ -32,7 +34,7 @@ export const layChiTietPhongVeAction = (maLichChieu) => {
 
 export const datVeAction = (thongTinDatVe) => {
   console.log('thongTinDatVeAction',thongTinDatVe)
-  return async (dispatch) => {
+  return async (dispatch,getState) => {
     try {
       dispatch({
         type: DISPLAY_LOADING,
@@ -53,7 +55,12 @@ export const datVeAction = (thongTinDatVe) => {
         type: HIDE_LOADING,
       });
 
+      let {taiKhoan} = getState().QuanLyNguoiDungReducer.userLogin
+      //sau khi mình đặt ghế thành công, thì trang sẽ dc load lại cho các user khác biết là mình đặt r
+      await connection.invoke('datGheThanhCong',taiKhoan,thongTinDatVe.maLichChieu)
+
       dispatch({ type: CHUYEN_TAB });
+
 
     } catch (error) {
       console.log("err", error.response.data);
@@ -63,3 +70,25 @@ export const datVeAction = (thongTinDatVe) => {
     }
   };
 };
+
+
+export const datGheAction = (ghe,maLichChieu) => {
+  //getState giúp ta lấy dữ liệu từ các reducer khác giống useSelector
+  //do action ko có sự kiện useSelector nên ta dùng getState của thunk
+  return async (dispatch,getState) => {
+    //đưa thông tin ghế lên reducer
+    await dispatch({
+      type: DAT_VE,
+      gheDuocChon: ghe,
+    })
+    //call api từ backend
+    let {danhSachGheDangDat} = getState().QuanLyDatVeReducer
+    let {taiKhoan} = getState().QuanLyNguoiDungReducer.userLogin
+
+    //chuyển mảng thành chuỗi
+    danhSachGheDangDat = JSON.stringify(danhSachGheDangDat)
+
+    //call api của signalR, gửi lên server BE, r sau đó BE ầm thầm trả về kết quả ngầm cho các user khác thông qua connection.on() bên mục checkout
+    connection.invoke('datGhe',taiKhoan,danhSachGheDangDat,maLichChieu)
+  }
+}

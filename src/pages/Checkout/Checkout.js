@@ -2,15 +2,22 @@
 import React, { Fragment, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
+  datGheAction,
   datVeAction,
   layChiTietPhongVeAction,
 } from "../../redux/actions/QuanLyDatVeAction";
 import style from "./Checkout.module.css";
 import "./Checkout.css";
-import { CloseOutlined, UserOutlined, SmileOutlined, WarningOutlined } from "@ant-design/icons";
+import {
+  CloseOutlined,
+  UserOutlined,
+  SmileOutlined,
+  WarningOutlined,
+} from "@ant-design/icons";
 import {
   CHANGE_TAB_POSITION,
   CHUYEN_TAB,
+  DAT_GHE,
   DAT_VE,
 } from "../../redux/const/settingConst";
 import _ from "lodash";
@@ -19,12 +26,12 @@ import { Tabs } from "antd";
 import { QuanLyNguoiDungReducer } from "../../redux/reducers/QuanLyNguoiDungReducer";
 import { layThongTinNguoiDungAction } from "../../redux/actions/QuanLyNguoiDungAction";
 import moment from "moment";
+import { connection } from "../..";
 
 function Checkout(props) {
   const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
-  const { chiTietPhongVe, danhSachGheDangDat,danhSachGheKhachDat } = useSelector(
-    (state) => state.QuanLyDatVeReducer
-  );
+  const { chiTietPhongVe, danhSachGheDangDat, danhSachGheKhachDat } =
+    useSelector((state) => state.QuanLyDatVeReducer);
   const { thongTinPhim, danhSachGhe } = chiTietPhongVe;
   const dispatch = useDispatch();
 
@@ -32,7 +39,57 @@ function Checkout(props) {
     //gửi mã id của url cho API
     // console.log('props.match.params.id',props.match.params.id)
     dispatch(layChiTietPhongVeAction(props.match.params.id));
+
+    //các user khác sẽ lắng nghe
+    //nếu có user nào thực hiện việc đặt vé thành công, ta sẽ load lại DS phòng vé
+    connection.on('datVeThanhCong', ()=>{
+      //load lại danh sách vé
+      dispatch(layChiTietPhongVeAction(props.match.params.id));
+    })
+
+    //vừa load trang là gọi lên api backend load dữ liệu khách đặt ghế
+    connection.invoke('loadDanhSachGhe', props.match.params.id)
+
+
+    //load danh sách ghế đang đặt từ api về
+    //này giống mapstatetopros, lấy data từ api về
+    //"loadDanhSachGheDaDat" này kết nối tới Backend, giống saga, gửi action để saga lắng nge thực hiện
+    //nó đc kích hoạt tự động để báo cáo rằng đang có 1 user khác đang đặt vé
+    connection.on("loadDanhSachGheDaDat", (dsGheKhachDat) => {
+      console.log('danhSachGheKhachDat',dsGheKhachDat);
+      //bước 1: loại user của mình ra khỏi danh sách
+      dsGheKhachDat = dsGheKhachDat.filter(item => item.taiKhoan !== userLogin.taiKhoan)
+
+      //bước 2: gộp DS ghế khách đặt đã lọc ở trên và ở all các user thành 1 mảng chung
+      let arrGheKhachDat = dsGheKhachDat.reduce((result, item, index) =>{
+        //vì danhSachGhe đang là string nên cần chuyển về mảng
+        let arrGhe = JSON.parse(item.danhSachGhe)
+
+        //push từng cái ghế vào mảng arrGheKhachDat
+        return [...result,...arrGhe]
+
+      },[])
+
+      //loại ra những giá trị trùng nhau
+      //đưa dữ liệu lên redux cập nhật
+      arrGheKhachDat = _.uniqBy(arrGheKhachDat, 'maGhe')
+      dispatch({type: DAT_GHE, arrGheKhachDat})
+    });
+
+    //cài đặt sự kiện khi reload trang 
+    window.addEventListener('beforeunload',clearGhe)
+    //bấm qua trag khác vẫn clear ghế
+    return()=>{
+      clearGhe();
+      window.removeEventListener('beforeunload',clearGhe)
+    };
   }, []);
+
+  //clear ghế khi ng khác F5 trang
+  //gửi yêu cầu lên api backend để hủy ghế
+  const clearGhe = function (e) {
+    connection.invoke('huyDat', userLogin.taiKhoan, props.match.params.id)
+  }
 
   const renderSeats = () => {
     return danhSachGhe?.map((ghe, index) => {
@@ -50,12 +107,13 @@ function Checkout(props) {
 
       //ktra từng ghế và render xem có phải ghế khách đặt hay ko
       //tìm thấy dc ghế của khách trong mảng ghế đang render
-      let classGheKhachDat='';
-      let indexGheKhachDat= danhSachGheKhachDat.findIndex(gheKD=>gheKD.maGhe === ghe.maGhe)
-        if(indexGheKhachDat!==-1){
-          classGheKhachDat = 'gheKhachDat';
-        }
-
+      let classGheKhachDat = "";
+      let indexGheKhachDat = danhSachGheKhachDat.findIndex(
+        (gheKD) => gheKD.maGhe === ghe.maGhe
+      );
+      if (indexGheKhachDat !== -1) {
+        classGheKhachDat = "gheKhachDat";
+      }
 
       let classGheDaDuocDat = "";
       if (userLogin.taiKhoan === ghe.taiKhoanNguoiDat) {
@@ -66,18 +124,14 @@ function Checkout(props) {
         classGheDangDat = "gheDangDat";
       }
 
-
-
       return (
         <Fragment key={index}>
           <button
             onClick={() => {
-              dispatch({
-                type: DAT_VE,
-                gheDuocChon: ghe,
-              });
+              dispatch(datGheAction(ghe,props.match.params.id,));
+
             }}
-            disabled={ghe.daDat || classGheKhachDat !== ''}
+            disabled={ghe.daDat || classGheKhachDat !== ""}
             className={`ghe ${classGheVip} ${classGheDaDat} ${classGheDangDat} ${classGheDaDuocDat} ${classGheKhachDat}`}
           >
             {ghe.daDat === true ? (
@@ -86,8 +140,11 @@ function Checkout(props) {
               ) : (
                 <CloseOutlined className="mb-1 font-semibold" />
               )
-            ) : classGheKhachDat === '' ?(
-              ghe.stt) : <WarningOutlined className="mb-1 font-semibold"/> }
+            ) : classGheKhachDat === "" ? (
+              ghe.stt
+            ) : (
+              <WarningOutlined className="mb-1 font-semibold" />
+            )}
           </button>
           {(index + 1) % 16 === 0 ? <br /> : ""}
         </Fragment>
@@ -299,10 +356,11 @@ function KetQuaDatVe(props) {
               <p>
                 Theater name: {seats.tenCumRap} - Seat:{" "}
                 {ticket.danhSachGhe?.map((ghe, index) => {
-                  return <span key={index} className="m-1 text-red-600">[{ghe.tenGhe}]
-                  {(index + 1) % 4 === 0 ? <br /> : ""}</span>
-                  
-                  
+                  return (
+                    <span key={index} className="m-1 text-red-600">
+                      [{ghe.tenGhe}]{(index + 1) % 4 === 0 ? <br /> : ""}
+                    </span>
+                  );
                 })}
               </p>
             </div>
