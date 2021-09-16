@@ -4,7 +4,7 @@ export class ThongTinLichChieu {
 }
 
 export class ThongTinPhim {
-  maLichChieu = "";
+  maLichChieu = 0;
   tenCumRap = "";
   tenRap = "";
   diaChi = "";

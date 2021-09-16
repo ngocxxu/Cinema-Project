@@ -12,6 +12,7 @@ import { quanLyDatVeService } from "../../services/QuanLyDatVeService";
 import { ThongTinDatVe } from "../../_core/models/ThongTinDatVe";
 
 export const layChiTietPhongVeAction = (maLichChieu) => {
+  // console.log("maLichChieuAction",maLichChieu)
   return async (dispatch) => {
     try {
       const result = await quanLyDatVeService.layChiTietPhongVe(maLichChieu);
@@ -29,7 +30,8 @@ export const layChiTietPhongVeAction = (maLichChieu) => {
   };
 };
 
-export const datVeAction = (thongTinDatVe = new ThongTinDatVe()) => {
+export const datVeAction = (thongTinDatVe) => {
+  console.log('thongTinDatVeAction',thongTinDatVe)
   return async (dispatch) => {
     try {
       dispatch({
@@ -37,7 +39,7 @@ export const datVeAction = (thongTinDatVe = new ThongTinDatVe()) => {
       });
 
       const result = await quanLyDatVeService.datVe(
-        (thongTinDatVe = new ThongTinDatVe())
+        (thongTinDatVe)
       );
       console.log("datVeAction", result);
 

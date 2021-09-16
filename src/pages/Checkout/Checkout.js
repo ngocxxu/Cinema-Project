@@ -30,6 +30,7 @@ function Checkout(props) {
 
   useEffect(() => {
     //gửi mã id của url cho API
+    // console.log('props.match.params.id',props.match.params.id)
     dispatch(layChiTietPhongVeAction(props.match.params.id));
   }, []);
 
@@ -205,7 +206,7 @@ function Checkout(props) {
               const thongTinDatVe = new ThongTinDatVe();
               thongTinDatVe.maLichChieu = props.match.params.id;
               thongTinDatVe.danhSachVe = danhSachGheDangDat;
-              console.log("thongTinDatVe", thongTinDatVe);
+              // console.log("thongTinDatVe", thongTinDatVe);
               dispatch(datVeAction(thongTinDatVe));
             }}
             className="mt-10 bg-green-500 text-white w-full text-center p-4 rounded hover:bg-green-600 cursor-pointer"
@@ -281,7 +282,10 @@ function KetQuaDatVe(props) {
               <p>
                 Theater name: {seats.tenCumRap} - Seat:{" "}
                 {ticket.danhSachGhe?.map((ghe, index) => {
-                  return <span>{ghe.tenGhe}</span>;
+                  return <span key={index} className="m-1 text-red-600">[{ghe.tenGhe}]
+                  {(index + 1) % 4 === 0 ? <br /> : ""}</span>
+                  
+                  
                 })}
               </p>
             </div>
@@ -307,7 +311,7 @@ function KetQuaDatVe(props) {
               the information below. We will not refund under any circumstances.
             </p>
           </div>
-          <div className="flex flex-wrap -m-2">{renderTicketItem()}</div>
+          <div className="flex flex-wrap m-2">{renderTicketItem()}</div>
         </div>
       </section>
     </div>
