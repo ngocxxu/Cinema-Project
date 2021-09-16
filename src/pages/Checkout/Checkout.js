@@ -13,6 +13,7 @@ import {
   UserOutlined,
   SmileOutlined,
   WarningOutlined,
+  HomeOutlined,
 } from "@ant-design/icons";
 import {
   CHANGE_TAB_POSITION,
@@ -22,11 +23,14 @@ import {
 } from "../../redux/const/settingConst";
 import _ from "lodash";
 import { ThongTinDatVe } from "../../_core/models/ThongTinDatVe";
-import { Tabs } from "antd";
+import { Button, Tabs } from "antd";
 import { QuanLyNguoiDungReducer } from "../../redux/reducers/QuanLyNguoiDungReducer";
 import { layThongTinNguoiDungAction } from "../../redux/actions/QuanLyNguoiDungAction";
 import moment from "moment";
 import { connection } from "../..";
+import { history } from "../../App";
+import { TOKEN, USER_LOGIN } from "../../util/setting/config";
+import { NavLink } from "react-router-dom";
 
 function Checkout(props) {
   const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
@@ -42,54 +46,54 @@ function Checkout(props) {
 
     //các user khác sẽ lắng nghe
     //nếu có user nào thực hiện việc đặt vé thành công, ta sẽ load lại DS phòng vé
-    connection.on('datVeThanhCong', ()=>{
+    connection.on("datVeThanhCong", () => {
       //load lại danh sách vé
       dispatch(layChiTietPhongVeAction(props.match.params.id));
-    })
+    });
 
     //vừa load trang là gọi lên api backend load dữ liệu khách đặt ghế
-    connection.invoke('loadDanhSachGhe', props.match.params.id)
-
+    connection.invoke("loadDanhSachGhe", props.match.params.id);
 
     //load danh sách ghế đang đặt từ api về
     //này giống mapstatetopros, lấy data từ api về
     //"loadDanhSachGheDaDat" này kết nối tới Backend, giống saga, gửi action để saga lắng nge thực hiện
     //nó đc kích hoạt tự động để báo cáo rằng đang có 1 user khác đang đặt vé
     connection.on("loadDanhSachGheDaDat", (dsGheKhachDat) => {
-      console.log('danhSachGheKhachDat',dsGheKhachDat);
+      console.log("danhSachGheKhachDat", dsGheKhachDat);
       //bước 1: loại user của mình ra khỏi danh sách
-      dsGheKhachDat = dsGheKhachDat.filter(item => item.taiKhoan !== userLogin.taiKhoan)
+      dsGheKhachDat = dsGheKhachDat.filter(
+        (item) => item.taiKhoan !== userLogin.taiKhoan
+      );
 
       //bước 2: gộp DS ghế khách đặt đã lọc ở trên và ở all các user thành 1 mảng chung
-      let arrGheKhachDat = dsGheKhachDat.reduce((result, item, index) =>{
+      let arrGheKhachDat = dsGheKhachDat.reduce((result, item, index) => {
         //vì danhSachGhe đang là string nên cần chuyển về mảng
-        let arrGhe = JSON.parse(item.danhSachGhe)
+        let arrGhe = JSON.parse(item.danhSachGhe);
 
         //push từng cái ghế vào mảng arrGheKhachDat
-        return [...result,...arrGhe]
-
-      },[])
+        return [...result, ...arrGhe];
+      }, []);
 
       //loại ra những giá trị trùng nhau
       //đưa dữ liệu lên redux cập nhật
-      arrGheKhachDat = _.uniqBy(arrGheKhachDat, 'maGhe')
-      dispatch({type: DAT_GHE, arrGheKhachDat})
+      arrGheKhachDat = _.uniqBy(arrGheKhachDat, "maGhe");
+      dispatch({ type: DAT_GHE, arrGheKhachDat });
     });
 
-    //cài đặt sự kiện khi reload trang 
-    window.addEventListener('beforeunload',clearGhe)
+    //cài đặt sự kiện khi reload trang
+    window.addEventListener("beforeunload", clearGhe);
     //bấm qua trag khác vẫn clear ghế
-    return()=>{
+    return () => {
       clearGhe();
-      window.removeEventListener('beforeunload',clearGhe)
+      window.removeEventListener("beforeunload", clearGhe);
     };
   }, []);
 
   //clear ghế khi ng khác F5 trang
   //gửi yêu cầu lên api backend để hủy ghế
   const clearGhe = function (e) {
-    connection.invoke('huyDat', userLogin.taiKhoan, props.match.params.id)
-  }
+    connection.invoke("huyDat", userLogin.taiKhoan, props.match.params.id);
+  };
 
   const renderSeats = () => {
     return danhSachGhe?.map((ghe, index) => {
@@ -128,8 +132,7 @@ function Checkout(props) {
         <Fragment key={index}>
           <button
             onClick={() => {
-              dispatch(datGheAction(ghe,props.match.params.id,));
-
+              dispatch(datGheAction(ghe, props.match.params.id));
             }}
             disabled={ghe.daDat || classGheKhachDat !== ""}
             className={`ghe ${classGheVip} ${classGheDaDat} ${classGheDangDat} ${classGheDaDuocDat} ${classGheKhachDat}`}
@@ -297,13 +300,57 @@ const { TabPane } = Tabs;
 
 function callback(key) {}
 
-export default function (props) {
+export default function CheckoutTab (props) {
   const { tabActive } = useSelector((state) => state.QuanLyDatVeReducer);
   const dispatch = useDispatch();
+  const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
+
+
+  const operations = (
+    <Fragment>
+      {!_.isEmpty(userLogin) ? (
+        <Fragment>
+          <button
+            className=""
+            onClick={() => {
+              history.push("/profile");
+            }}
+          >
+            {" "}
+            <div className="w-16 h-16 rounded-full bg-yellow-500 flex justify-center items-center">
+              {userLogin.taiKhoan.substr(0, 1)}
+            </div>
+            Hello, {userLogin.taiKhoan}
+          </button>
+          <button className="text-red-400" onClick={() => {
+            localStorage.removeItem(USER_LOGIN);
+            localStorage.removeItem(TOKEN);
+            history.push("/home");
+            //refresh trang lại
+            window.location.reload();
+          }}>Sign out</button>
+        </Fragment>
+      ) : (
+        ""
+      )}
+    </Fragment>
+  );
+
+  //reset tabpane lại thì khi chuyển trang từ Home
+  useEffect(() => {
+    return ()=>{
+      dispatch({
+        type: CHANGE_TAB_POSITION,
+        number: '1',
+      })
+    }
+  },[])
+
   return (
     <div className="p-5">
       {/* key đóng vai trò là con số để chuyển tab, chứ TabPane ko nhận sự kiện onClick */}
       <Tabs
+        tabBarExtraContent={operations}
         defaultActiveKey="1"
         activeKey={tabActive.toString()}
         onChange={(key) => {
@@ -318,6 +365,8 @@ export default function (props) {
         </TabPane>
         <TabPane tab="02 BOOKING TICKET RESULT" key="2">
           <KetQuaDatVe {...props}></KetQuaDatVe>
+        </TabPane>
+        <TabPane tab={<NavLink className='mx-auto' to='/'><HomeOutlined /></NavLink>} key="0">
         </TabPane>
       </Tabs>
     </div>

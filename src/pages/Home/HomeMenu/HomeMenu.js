@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Fragment, useState } from "react";
 import { Tabs, Radio, Space } from "antd";
 import { NavLink } from "react-router-dom";
@@ -70,7 +71,7 @@ export default function HomeMenu(props) {
                                     return (
                                       <NavLink
                                         className="text-lg "
-                                        to="/"
+                                        to={`/checkout/${lichChieu.maLichChieu}`}
                                         key={index}
                                       >
                                         {moment(

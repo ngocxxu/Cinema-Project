@@ -1,15 +1,69 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import { history } from "../../../../App";
 import { Select } from "antd";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import _ from "lodash";
+import { TOKEN, USER_LOGIN } from "../../../../util/setting/config";
 
 const { Option } = Select;
 export default function Header(props) {
-  const {t, i18n} = useTranslation()
+  const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
+
+  const { t, i18n } = useTranslation();
   const handleChange = (value) => {
-  i18n.changeLanguage(value)
+    i18n.changeLanguage(value);
   };
+  const renderLogin = () => {
+    if (_.isEmpty(userLogin)) {
+      return (
+        <Fragment>
+          <button
+            onClick={() => {
+              history.push("/login");
+            }}
+            className="self-center px-8 py-3 rounded font-semibold"
+          >
+            {t("signin")}
+          </button>
+          <button
+            onClick={() => {
+              history.push("/register");
+            }}
+            className="self-center px-8 py-3 font-semibold rounded bg-violet-600 text-coolGray-50"
+          >
+            {t("signup")}
+          </button>
+        </Fragment>
+      );
+    } else {
+      return (
+        <Fragment>
+          <button
+            onClick={() => {
+              history.push("/profile");
+            }}
+            className="self-center px-8 py-3 rounded font-semibold"
+          >
+            Hello, {userLogin.taiKhoan}
+          </button>{" "}
+          <button
+            className="text-red-400"
+            onClick={() => {
+              localStorage.removeItem(USER_LOGIN);
+              localStorage.removeItem(TOKEN);
+              //reload để redux render lại datta rỗng
+              window.location.reload(); 
+            }}
+          >
+            Sign out
+          </button>
+        </Fragment>
+      );
+    }
+  };
+
   return (
     <header className="z-20 p-4 bg-coolGray-100 text-coolGray-800 fixed w-full text-white bg-opacity-50 bg-black">
       <div className="container flex justify-between h-16 mx-auto">
@@ -73,17 +127,7 @@ export default function Header(props) {
           </li>
         </ul>
         <div className="items-center flex-shrink-0 hidden lg:flex">
-          <button
-            onClick={() => {
-              history.push("/login");
-            }}
-            className="self-center px-8 py-3 rounded font-semibold"
-          >
-            {t('signin')}
-          </button>
-          <button className="self-center px-8 py-3 font-semibold rounded bg-violet-600 text-coolGray-50">
-          {t('signup')}
-          </button>
+          {renderLogin()}
           {/* {t('hello.1')} */}
           <div>
             <Select

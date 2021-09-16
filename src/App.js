@@ -15,6 +15,7 @@ import { Suspense,lazy } from "react";
 import CheckoutTemplate from "./template/CheckoutTemplate/CheckoutTemplate";
 import UserTemplate from "./template/UserTemplate/UserTemplate";
 import Loading from "./components/Loading/Loading";
+import Profile from "./pages/Profile/Profile";
 
 //delay load trang cho html để giao diện hiện ra full, giống như delay api
 //lấy CheckoutTemplateLazy bọc CheckoutTemplate
@@ -27,14 +28,15 @@ function App() {
     <Router history={history}>
     <Loading></Loading>
       <Switch>
-        <HomeTemplate path="/" exact Component={Home}></HomeTemplate>
         <HomeTemplate path="/home" exact Component={Home}></HomeTemplate>
         <HomeTemplate path="/contact" exact Component={Contact}></HomeTemplate>
         <HomeTemplate path="/news" exact Component={News}></HomeTemplate>
         <HomeTemplate path="/detail/:id" exact Component={Detail}></HomeTemplate>
-        <Router path="/register" exact Component={Register}></Router>
+        <HomeTemplate path="/profile" exact Component={Profile}></HomeTemplate>
         <CheckoutTemplate path="/checkout/:id" exact Component={Checkout}></CheckoutTemplate>
+        <UserTemplate path="/register" exact Component={Register}></UserTemplate>
         <UserTemplate path="/login" exact Component={Login}></UserTemplate>
+        <HomeTemplate path="/" exact Component={Home}></HomeTemplate>
 
         {/* <Suspense fallback={<h1>LOADING...</h1>}>
         <CheckoutTemplateLazy path="/checkout/:id" exact Component={Checkout}></CheckoutTemplateLazy>
