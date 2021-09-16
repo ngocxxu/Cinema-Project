@@ -10,8 +10,13 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { DOMAIN } from "./util/setting/config";
 
+// import i18n (needs to be bundled ;)) 
+import './i18n';
+
+
 //cấu hình realtime
 import * as signalR from '@aspnet/signalr'
+
 
 //đoạn code này dùng để kết nối đến server và lắng nge sự kiện từ server
 //ng dùng vừa mở ứng dụng web là đoạn code này dc cài đặt ngầm trong WSocket của họ
