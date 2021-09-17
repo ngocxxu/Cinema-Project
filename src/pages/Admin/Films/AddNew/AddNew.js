@@ -13,10 +13,14 @@ import {
 } from 'antd';
 import { useFormik } from 'formik';
 import moment from 'moment';
+import { useDispatch } from 'react-redux';
+import { themPhimUploadHinhAction } from '../../../../redux/actions/QuanLyPhimAction';
+import { GROUPID } from '../../../../util/setting/config';
 
 const AddNew = () => {
   const [componentSize, setComponentSize] = useState('default');
   const [imgSrc, setImgSrc] = useState('')
+  const dispatch = useDispatch()
 
   const onFormLayoutChange = ({ size }) => {
     setComponentSize(size);
@@ -33,10 +37,33 @@ const AddNew = () => {
       hot:false,
       danhGia:0,
       hinhAnh:{},
+      // maNhom: GROUPID
     },
     onSubmit: (values)=>{
+      values.maNhom = GROUPID;
       console.log({values})
+      //tạo đối tượng FormData của JSON có sẵn => đưa gtri values từ formik vào formdata
+      let formData = new FormData();
 
+      for(let key in values){
+        formData[key] = values[key];
+        formData.append(key, values[key]);
+        if(key === 'hinhAnh'){
+          //formData chứa dữ liệu dùng append
+          //formik.hinhAnh.name: là abc.png
+          //phải gửi đủ 3 tham số
+          formData.append('File',values.hinhAnh,values.hinhAnh.name);
+        }else{
+          formData[key] = values[key];
+        }
+      }
+      //gọi api gửi các gtri formdata về BE xử lý
+      dispatch(themPhimUploadHinhAction(formData))
+
+      //mún consolelog xem giá trị value từ formik phải dùng get
+      //do tính bảo mật của FormData nên ta chỉ thấy KQ trả về là 1 obj rỗng
+      //mún nhìn thấy value của thuộc tính thì dùng get để truy xuất
+      // console.log('formik',formData.get('tenPhim'))
     }
   })
 
@@ -66,7 +93,6 @@ const AddNew = () => {
     //ta chỉ chọn 1 hình đầu tiên nên ghi thêm [0]
     let file = e.target.files[0]
 
-    if(file.type === 'image/jpg '|| file.type === 'image/gif'|| file.type === 'image/png' || file.type === 'image/jpeg '){
       //tạo đối tượng đọc file 
       //đối tượng FileReader có sẵn của JS
       let reader = new FileReader();
@@ -78,9 +104,7 @@ const AddNew = () => {
         // console.log(e.target.result);
         setImgSrc(e.target.result); //hình base 64
       }
-    }else{
-      alert("Please upload right format file")
-    }
+    
 
     //đem dữ liệu file lưu vào formik
     formik.setFieldValue('hinhAnh',file)
@@ -138,7 +162,7 @@ const AddNew = () => {
         <Form.Item label="Picture">
           <input type='file' onChange={handleChangeFile}/>
           {/* src = "data:image/png;base64, mã chuỗi" */}
-          <img style={{width:200, height:200}} src={imgSrc} alt='...' accept='image/png, image/jpeg, image/jpg,image/gif'></img>
+          <img style={{width:200, height:200}} src={imgSrc} alt='...' ></img>
         </Form.Item>
         <Form.Item label="Button">
           <button type='submit' className='bg-blue-400 text-white p-2 rounded'>Add Film</button>

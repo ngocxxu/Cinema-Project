@@ -13,3 +13,14 @@ export const layDanhSachPhimAction = ()=>{
     }catch(err){console.log('err',err)}
   }
 }
+
+export const themPhimUploadHinhAction =(formData)=>{
+  return async (dispatch) => {
+    try{
+      const result = await quanLyPhimService.themPhimUploadHinh(formData);
+      console.log({result})
+
+
+    }catch(err){console.log('err',err)}
+  }
+}
