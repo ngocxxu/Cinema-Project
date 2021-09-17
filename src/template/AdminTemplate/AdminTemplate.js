@@ -6,6 +6,8 @@ import {
   FileOutlined,
   TeamOutlined,
   UserOutlined,
+  PlusCircleOutlined,
+  PlusOutlined,
 } from "@ant-design/icons";
 import { TOKEN, USER_LOGIN } from "../../util/setting/config";
 import { Redirect, Route } from "react-router";
@@ -13,8 +15,7 @@ import { useSelector } from "react-redux";
 import { history } from "../../App";
 import _ from "lodash";
 import { NavLink } from "react-router-dom";
-import zupi from '../../assets/img/logozupiiiiii.png'
-
+import zupi from "../../assets/img/logozupiiiiii.png";
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -86,17 +87,22 @@ export default function AdminTemplate(props) {
             <Layout style={{ minHeight: "100vh" }}>
               <Sider collapsible collapsed={collapse} onCollapse={onCollapse}>
                 <div className="logo">
-                  <img src={zupi} alt='zupi'></img>
+                  <img src={zupi} alt="zupi"></img>
                 </div>
                 <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
                   <Menu.Item key="1" icon={<UserOutlined />}>
-                    <NavLink to="users">Users</NavLink>
+                    <NavLink to="/admin/users">Users</NavLink>
                   </Menu.Item>
-                  <Menu.Item key="2" icon={<FileOutlined />}>
-                    <NavLink to="films">Films</NavLink>
-                  </Menu.Item>
-                  <Menu.Item key="3" icon={<DesktopOutlined />}>
-                    <NavLink to="showtimes">Showtime</NavLink>
+                  <SubMenu key="sub2" icon={<TeamOutlined />} title="Films">
+                    <Menu.Item key="2" icon={<FileOutlined />}>
+                      <NavLink to="/admin/films">Films</NavLink>
+                    </Menu.Item>
+                    <Menu.Item key="3" icon={<PlusOutlined />}>
+                      <NavLink to="/admin/films/addnew">AddNew</NavLink>
+                    </Menu.Item>
+                  </SubMenu>
+                  <Menu.Item key="4" icon={<DesktopOutlined />}>
+                    <NavLink to="/admin/showtimes">Showtime</NavLink>
                   </Menu.Item>
                   {/* <SubMenu key="sub1" icon={<UserOutlined />} title="User">
               <Menu.Item key="3">Tom</Menu.Item>
@@ -117,15 +123,9 @@ export default function AdminTemplate(props) {
                   className="site-layout-background"
                   style={{ padding: 0 }}
                 >
-                  <div
-                    className="text-right pr-10 "
-                  >{operations}</div>
+                  <div className="text-right pr-10 ">{operations}</div>
                 </Header>
                 <Content style={{ margin: "0 16px" }}>
-                  <Breadcrumb style={{ margin: "16px 0" }}>
-                    <Breadcrumb.Item>User</Breadcrumb.Item>
-                    <Breadcrumb.Item>Bill</Breadcrumb.Item>
-                  </Breadcrumb>
                   <div
                     className="site-layout-background"
                     style={{ padding: 24, minHeight: 360 }}

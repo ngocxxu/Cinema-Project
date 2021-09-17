@@ -21,6 +21,7 @@ import Dashboard from "./pages/Admin/Dashboard/Dashboard";
 import Films from "./pages/Admin/Films/Films";
 import Users from "./pages/Admin/Users/Users";
 import Showtime from "./pages/Admin/Showtime/Showtime";
+import AddNew from "./pages/Admin/Films/AddNew/AddNew";
 
 //delay load trang cho html để giao diện hiện ra full, giống như delay api
 //lấy CheckoutTemplateLazy bọc CheckoutTemplate
@@ -43,6 +44,7 @@ function App() {
         <UserTemplate path="/login" exact Component={Login}></UserTemplate>
         <AdminTemplate path="/admin" exact Component={Dashboard}></AdminTemplate>
         <AdminTemplate path="/admin/films" exact Component={Films}></AdminTemplate>
+        <AdminTemplate path="/admin/films/addnew" exact Component={AddNew}></AdminTemplate>
         <AdminTemplate path="/admin/users" exact Component={Users}></AdminTemplate>
         <AdminTemplate path="/admin/showtimes" exact Component={Showtime}></AdminTemplate>
         <HomeTemplate path="/" exact Component={Home}></HomeTemplate>
