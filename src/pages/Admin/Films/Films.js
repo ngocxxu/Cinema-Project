@@ -96,8 +96,8 @@ export default function Films(props) {
       render: (text, film, index) => {
         return (
           <Fragment>
-          <NavLink className="bg-blue-400 text-white text-2xl p-2 mr-2 rounded hover:text-yellow-300" to='/'><EditOutlined className=""></EditOutlined></NavLink>
-          <NavLink className="bg-red-400 text-white text-2xl p-2 ml-2 rounded hover:text-yellow-300" to='/'><DeleteOutlined></DeleteOutlined></NavLink>
+          <NavLink key={1} className="bg-blue-400 text-white text-2xl p-2 mr-2 rounded hover:text-yellow-300" to={`/admin/films/edit/${film.maPhim}`}><EditOutlined className=""></EditOutlined></NavLink>
+          <NavLink key={2} className="bg-red-400 text-white text-2xl p-2 ml-2 rounded hover:text-yellow-300" to='/'><DeleteOutlined></DeleteOutlined></NavLink>
           </Fragment>
         );
       },

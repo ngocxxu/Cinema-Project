@@ -17,6 +17,11 @@ export class QuanLyPhimService extends baseService {
   themPhimUploadHinh=(formData)=>{
     return this.post(`/api/QuanLyPhim/ThemPhimUploadHinh`,formData)
   }
-}
+  layThongTinPhim=(maPhim)=>{
+    return this.get(`/api/QuanLyPhim/LayThongTinPhim?MaPhim=${maPhim}`)
+  }
+  capNhatPhimUpload = (formData) => {
+    return this.post(`/api/QuanLyPhim/CapNhatPhimUpload`,formData);
+}}
 
  export const quanLyPhimService = new QuanLyPhimService();

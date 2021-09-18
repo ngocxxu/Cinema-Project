@@ -14,5 +14,6 @@ export const CLEAR_THONG_TIN_DAT_VE = 'CLEAR_THONG_TIN_DAT_VE';
 export const CHUYEN_TAB = 'CHUYEN_TAB';
 export const CHANGE_TAB_POSITION = 'CHANGE_TAB_POSITION';
 export const DAT_GHE = 'DAT_GHE';
+export const SET_THONG_TIN_PHIM = 'SET_THONG_TIN_PHIM';
 
 
