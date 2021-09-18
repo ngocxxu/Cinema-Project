@@ -47,8 +47,8 @@ function App() {
         <AdminTemplate path="/admin/films" exact Component={Films}></AdminTemplate>
         <AdminTemplate path="/admin/films/addnew" exact Component={AddNew}></AdminTemplate>
         <AdminTemplate path="/admin/films/edit/:id" exact Component={Edit}></AdminTemplate>
+        <AdminTemplate path="/admin/films/showtimes/:id/:tenPhim" exact Component={Showtime}></AdminTemplate>
         <AdminTemplate path="/admin/users" exact Component={Users}></AdminTemplate>
-        <AdminTemplate path="/admin/showtimes" exact Component={Showtime}></AdminTemplate>
         <HomeTemplate path="/" exact Component={Home}></HomeTemplate>
 
         {/* <Suspense fallback={<h1>LOADING...</h1>}>

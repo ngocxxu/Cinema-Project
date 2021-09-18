@@ -34,6 +34,10 @@ export class QuanLyDatVeService extends baseService {
       headers: { Authorization: "Bearer " + localStorage.getItem(TOKEN) }, //JWT
     });
   };
+
+  taoLichChieu = (thongTinLichChieu) => {
+    return this.post(`/api/QuanLyDatVe/TaoLichChieu`,thongTinLichChieu)
+  }
 }
 
 export const quanLyDatVeService = new QuanLyDatVeService();
