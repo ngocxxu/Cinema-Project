@@ -11,22 +11,38 @@ export class QuanLyNguoiDungService extends baseService {
     //trả về promise
     return this.post(`/api/QuanLyNguoiDung/DangNhap`,thongTinDangNhap)
   }
-  layThongTinNguoiDung = ()=>{
+  layThongTinNguoiDung = (taiKhoan='')=>{
+    if(taiKhoan.trim() !==''){
+      return this.post(`/api/QuanLyNguoiDung/ThongTinTaiKhoan?taiKhoan=${taiKhoan}`)
+    }
     return this.post(`/api/QuanLyNguoiDung/ThongTinTaiKhoan`)
   }
   dangKyNguoiDung = (formDangKy)=>{
     return this.post(`/api/QuanLyNguoiDung/DangKy`,formDangKy)
   }
+  layDanhSachNguoiDung = (keyword='')=>{
+    if(keyword.trim() !== ''){
+      return this.get(`/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=${GROUPID}&tuKhoa=${keyword}`)
+    }
+    return this.get(`/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=${GROUPID}`)
+  }
+  xoaNguoiDung = (taiKhoan)=>{
+    return this.delete(`/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${taiKhoan}`)
+  }
+  layDanhSachLoaiNguoiDung = ()=>{
+    return this.get(`/api/QuanLyNguoiDung/LayDanhSachLoaiNguoiDung`)
+  }
+  capNhatThongTinNguoiDung = (formDangKy)=>{
+    return this.post(`/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`,formDangKy)
+  }
 
-//   layThongTinNguoiDung= () => {
-//     return Axios({
-//         url:`http://movieapi.cyberlearn.vn/api/QuanLyNguoiDung/ThongTinTaiKhoan`,
-//         method:'POST',
-//         headers: {'Authorization': 'Bearer ' + localStorage.getItem(TOKEN)} //JWT
-//     }) 
-// }
+  themNguoiDung = (formDangKy)=>{
+    return this.post(`/api/QuanLyNguoiDung/ThemNguoiDung`,formDangKy)
+  }
 
-
+  layThongTinNguoiDungUser = (taiKhoan)=>{
+    return this.post(`/api/QuanLyNguoiDung/LayThongTinNguoiDung?taiKhoan=${taiKhoan}`)
+  }
 
 
 }

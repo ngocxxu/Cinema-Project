@@ -22,7 +22,7 @@ export default function Register(props) {
 
     validationSchema: Yup.object().shape({
       hoTen: Yup.string()
-        .matches(/^[A-Za-z]+$/, "Name can not a number")
+        .matches(/^[A-Za-z\s]+$/, "Name can not a number")
         .required("Name can not be empty!"),
       taiKhoan: Yup.string()
         .min(6, "Account name must be at least 6 characters")

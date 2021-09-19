@@ -23,6 +23,8 @@ import Users from "./pages/Admin/Users/Users";
 import Showtime from "./pages/Admin/Showtime/Showtime";
 import AddNew from "./pages/Admin/Films/AddNew/AddNew";
 import Edit from "./pages/Admin/Films/Edit/Edit";
+import AddNewUser from "./pages/Admin/Users/AddNewUser/AddNewUser";
+import EditUser from "./pages/Admin/Users/EditUser/EditUser";
 
 //delay load trang cho html để giao diện hiện ra full, giống như delay api
 //lấy CheckoutTemplateLazy bọc CheckoutTemplate
@@ -49,6 +51,8 @@ function App() {
         <AdminTemplate path="/admin/films/edit/:id" exact Component={Edit}></AdminTemplate>
         <AdminTemplate path="/admin/films/showtimes/:id/:tenPhim" exact Component={Showtime}></AdminTemplate>
         <AdminTemplate path="/admin/users" exact Component={Users}></AdminTemplate>
+        <AdminTemplate path="/admin/users/addnewuser" exact Component={AddNewUser}></AdminTemplate>
+        <AdminTemplate path="/admin/users/edituser/:id" exact Component={EditUser}></AdminTemplate>
         <HomeTemplate path="/" exact Component={Home}></HomeTemplate>
 
         {/* <Suspense fallback={<h1>LOADING...</h1>}>

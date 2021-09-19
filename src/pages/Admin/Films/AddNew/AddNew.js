@@ -164,8 +164,8 @@ const AddNew = () => {
           {/* src = "data:image/png;base64, mã chuỗi" */}
           <img style={{width:200, height:200}} src={imgSrc} alt='...' ></img>
         </Form.Item>
-        <Form.Item label="Button">
-          <button type='submit' className='bg-blue-400 text-white p-2 rounded'>Add Film</button>
+        <Form.Item label="Action">
+          <button type='submit' className='bg-blue-500 hover:bg-blue-600 text-white p-2 rounded'>Add Film</button>
         </Form.Item>
       </Form>
     </>

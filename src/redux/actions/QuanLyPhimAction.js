@@ -23,6 +23,7 @@ export const themPhimUploadHinhAction =(formData)=>{
     try{
       const result = await quanLyPhimService.themPhimUploadHinh(formData);
       console.log({result})
+      history.push('/admin/films')
 
 
     }catch(err){console.log('err',err)}

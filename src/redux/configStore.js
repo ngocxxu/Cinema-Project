@@ -13,8 +13,7 @@ const rootReducer = combineReducers({
   QuanLyRapReducer:QuanLyRapReducer,
   QuanLyNguoiDungReducer,
   QuanLyDatVeReducer:QuanLyDatVeReducer,
-  QuanLyNguoiDungReducer:QuanLyNguoiDungReducer,
-  LoadingReducer:LoadingReducer,
+  LoadingReducer,
 
 });
 

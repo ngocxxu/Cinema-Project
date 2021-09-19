@@ -33,15 +33,15 @@ export default function AdminTemplate(props) {
     window.scrollTo(0, 0);
   });
 
-  // if(!localStorage.getItem(USER_LOGIN)){
-  //   alert('You do not have permission into the page')
-  //   return <Redirect to='/'></Redirect>
-  // }
+  if(!localStorage.getItem(USER_LOGIN)){
+    alert('You do not have permission into the page')
+    return <Redirect to='/'></Redirect>
+  }
 
-  // if(userLogin.maLoaiNguoiDung !== 'QuanTri'){
-  //   alert('You do not have permission into the page')
-  //   return <Redirect to='/'></Redirect>
-  // }
+  if(userLogin.maLoaiNguoiDung !== 'QuanTri'){
+    alert('You do not have permission into the page')
+    return <Redirect to='/'></Redirect>
+  }
 
   const operations = (
     <Fragment>
@@ -90,20 +90,25 @@ export default function AdminTemplate(props) {
                   <img src={zupi} alt="zupi"></img>
                 </div>
                 <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-                  <Menu.Item key="1" icon={<UserOutlined />}>
-                    <NavLink to="/admin/users">Users</NavLink>
-                  </Menu.Item>
-                  <SubMenu key="sub2" icon={<TeamOutlined />} title="Films">
-                    <Menu.Item key="2" icon={<FileOutlined />}>
+                <SubMenu key="sub1" icon={<DesktopOutlined />} title="Films Manage">
+                    <Menu.Item key="1" icon={<FileOutlined />}>
                       <NavLink to="/admin/films">Films</NavLink>
                     </Menu.Item>
-                    <Menu.Item key="3" icon={<PlusOutlined />}>
-                      <NavLink to="/admin/films/addnew">AddNew</NavLink>
+                    <Menu.Item key="2" icon={<PlusOutlined />}>
+                      <NavLink to="/admin/films/addnew">Add New Film</NavLink>
                     </Menu.Item>
                   </SubMenu>
-                  <Menu.Item key="4" icon={<DesktopOutlined />}>
-                    <NavLink to="/admin/showtimes">Showtime</NavLink>
+                  <SubMenu key="sub2" icon={<TeamOutlined />} title="User Manage">
+                  <Menu.Item key="3" icon={<UserOutlined />}>
+                    <NavLink to="/admin/users">Users</NavLink>
                   </Menu.Item>
+                    <Menu.Item key="4" icon={<PlusOutlined />}>
+                      <NavLink to="/admin/users/addnewuser">Add New User</NavLink>
+                    </Menu.Item>
+                  </SubMenu>
+                  {/* <Menu.Item key="3" icon={<DesktopOutlined />}>
+                    <NavLink to="/admin/showtimes">Showtime</NavLink>
+                  </Menu.Item> */}
                   {/* <SubMenu key="sub1" icon={<UserOutlined />} title="User">
               <Menu.Item key="3">Tom</Menu.Item>
               <Menu.Item key="4">Bill</Menu.Item>

@@ -82,14 +82,14 @@ export default function Films(props) {
           </Fragment>
         );
       },
-      sorter: (a, b) => {
-        let tenPhimA = a.tenPhim.toLowerCase().trim();
-        let tenPhimB = b.tenPhim.toLowerCase().trim();
-        if (tenPhimA > tenPhimB) {
-          return 1;
-        }
-        return -1;
-      },
+      // sorter: (a, b) => {
+      //   let tenPhimA = a.tenPhim.toLowerCase().trim();
+      //   let tenPhimB = b.tenPhim.toLowerCase().trim();
+      //   if (tenPhimA > tenPhimB) {
+      //     return 1;
+      //   }
+      //   return -1;
+      // },
     },
     {
       title: "Action",
@@ -154,17 +154,17 @@ export default function Films(props) {
   return (
     <div className="">
       <h3 className="text-2xl">Films Management</h3>
-      <Button
+      {/* <Button
         onClick={() => {
           history.push("/admin/films/addnew");
         }}
         className="mb-3"
       >
         Add Films
-      </Button>
+      </Button> */}
       <Search
         className="mb-3"
-        placeholder="input search film name"
+        placeholder="input search"
         enterButton="Search"
         size="large"
         onSearch={onSearch}

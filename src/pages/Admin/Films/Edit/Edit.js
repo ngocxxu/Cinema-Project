@@ -172,8 +172,8 @@ const Edit = (props) => {
           <br />
           <img width={100} height={100} src={imgSrc === '' ? thongTinPhim.hinhAnh : imgSrc} />
         </Form.Item>
-        <Form.Item label="Button">
-          <button type="submit" className="bg-blue-300 text-white p-2">Update</button>
+        <Form.Item label="Action">
+          <button type="submit" className="bg-red-500 hover:bg-red-600 text-white p-2 rounded">Update</button>
 
         </Form.Item>
       </Form>

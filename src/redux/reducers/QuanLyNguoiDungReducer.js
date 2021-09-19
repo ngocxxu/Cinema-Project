@@ -2,7 +2,10 @@ import { USER_LOGIN } from "../../util/setting/config";
 import { TOKEN } from "../../util/setting/config";
 import {
   DANG_NHAP_ACTION,
-  SET_THONG_TIN_NGUOI_DUNG,
+  LAY_THONG_TIN_NGUOI_DUNG_USER,
+  SET_DANH_SACH_NGUOI_DUNG,
+  SET_LOAI_NGUOI_DUNG,
+  SET_THONG_TIN_NGUOI_DUNG
 } from "../const/settingConst";
 
 let user = {};
@@ -16,6 +19,19 @@ if (localStorage.getItem(USER_LOGIN)) {
 const initialState = {
   userLogin: user,
   thongTinNguoiDung: {},
+  arrUser: [
+    {
+      taiKhoan: "",
+      hoTen: "",
+      email: "",
+      soDt: "",
+      matKhau: "",
+      maLoaiNguoiDung: "",
+    },
+  ],
+  arrUserDefault: [],
+  arrTypeUser: [],
+  thongTinNguoiDungUser: {}
 };
 
 export const QuanLyNguoiDungReducer = (state = initialState, action) => {
@@ -32,6 +48,21 @@ export const QuanLyNguoiDungReducer = (state = initialState, action) => {
     case SET_THONG_TIN_NGUOI_DUNG:
       state.thongTinNguoiDung = action.thongTinNguoiDung;
       return { ...state };
+
+    case SET_DANH_SACH_NGUOI_DUNG:
+      state.arrUser = action.arrUser;
+      console.log('state.arrUser',state.arrUser)
+      state.arrUserDefault = state.arrUser;
+      return { ...state };
+
+    case SET_LOAI_NGUOI_DUNG:
+      console.log('action.arrTypeUser',action.arrTypeUser)
+      state.arrTypeUser = action.arrTypeUser;
+      return { ...state };
+
+    case LAY_THONG_TIN_NGUOI_DUNG_USER:
+    state.thongTinNguoiDungUser = action.thongTinNguoiDungUser;
+    return { ...state };
 
     default:
       return { ...state };
