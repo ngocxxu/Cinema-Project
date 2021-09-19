@@ -14,6 +14,9 @@ export class QuanLyNguoiDungService extends baseService {
   layThongTinNguoiDung = ()=>{
     return this.post(`/api/QuanLyNguoiDung/ThongTinTaiKhoan`)
   }
+  dangKyNguoiDung = (formDangKy)=>{
+    return this.post(`/api/QuanLyNguoiDung/DangKy`,formDangKy)
+  }
 
 //   layThongTinNguoiDung= () => {
 //     return Axios({
@@ -28,4 +31,4 @@ export class QuanLyNguoiDungService extends baseService {
 
 }
 
- export const quanLyNguoiDungService = new QuanLyNguoiDungService();
+export const quanLyNguoiDungService = new QuanLyNguoiDungService();

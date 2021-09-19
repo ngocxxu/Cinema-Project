@@ -12,7 +12,7 @@ export const dangNhapAction = (thongTinDangNhap) => {
           thongTinDangNhap: result.data.content,
         });
         //login thành công thì chuyển về trang trc đó
-        history.goBack();
+        history.push('/');
       }
     } catch (err) {
       console.log("err", err);
@@ -35,3 +35,14 @@ export const layThongTinNguoiDungAction = () => {
     }
   };
 };
+
+//register
+export const dangKyAction = (formDangKy)=>{
+  return async (dispatch) => {
+    try{
+      const result = await quanLyNguoiDungService.dangKyNguoiDung(formDangKy)
+      console.log({result});
+      history.push('/login');
+    }catch(err){console.log('err',err.response?.data)}
+  }
+}

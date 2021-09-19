@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { dangNhapAction } from "../../redux/actions/QuanLyNguoiDungAction";
+import { history } from "../../App";
 
 export default function Login(props) {
   const dispatch = useDispatch();
@@ -112,9 +113,13 @@ export default function Login(props) {
             <div className="mt-10">
               <button
                 // type="button"
+                // onClick={() => {
+                //   history.push('/')
+                // }}
                 className="bg-indigo-500 text-gray-100 p-4 w-full rounded-full tracking-wide
                           font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-indigo-600
                           shadow-lg"
+
               >
                 Log In
               </button>
