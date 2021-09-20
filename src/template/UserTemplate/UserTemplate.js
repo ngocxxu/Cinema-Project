@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import { Route } from "react-router";
+import BG2 from '../../assets/img/bg2.jpg'
 
 export default function UserTemplate(props) {
   const { Component, ...restRoute } = props;
@@ -14,9 +15,9 @@ export default function UserTemplate(props) {
         return (
           <Fragment>
             <div className="lg:flex">
-              <Component {...propsRoute}></Component>
-              <div className="hidden lg:flex items-center justify-center bg-indigo-100 flex-1 h-screen">
-                <div className="max-w-xs transform duration-200 hover:scale-110 cursor-pointer">
+              <div className="hidden lg:flex items-center justify-center  flex-1 h-screen">
+                <div className="bg-no-repeat bg-cover bg-center w-full h-full" style={{backgroundImage: (`url(${BG2})`)}}></div>
+                {/* <div className="max-w-xs transform duration-200 hover:scale-110 cursor-pointer">
                   <svg
                     className="w-5/6 mx-auto"
                     xmlns="http://www.w3.org/2000/svg"
@@ -181,8 +182,9 @@ export default function UserTemplate(props) {
                       fill="#2f2e41"
                     />
                   </svg>
-                </div>
+                </div> */}
               </div>
+              <Component {...propsRoute}></Component>
             </div>
           </Fragment>
         );

@@ -211,7 +211,7 @@ export default function Register(props) {
             </div>
           </div>
           <div className="mt-12 text-sm font-display font-semibold text-gray-700 text-center">
-            Have an account ?{" "}
+            Have already an account ?{" "}
             <NavLink
               to="/login"
               className="cursor-pointer text-indigo-600 hover:text-indigo-800"

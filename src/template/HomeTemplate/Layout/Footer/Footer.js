@@ -12,7 +12,7 @@ export default function Footer(props) {
 
   return (
     <footer
-      className="mt-20 py-6 bg-coolGray-100 text-coolGray-900 text-white"
+      className="py-6 bg-coolGray-100 text-coolGray-900 text-white"
       style={{ backgroundColor: "#00796b" }}
     >
       <div className="container px-6 mx-auto space-y-6 divide-y divide-gray-400 md:space-y-12 divide-opacity-50">

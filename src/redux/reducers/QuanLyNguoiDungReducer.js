@@ -5,7 +5,8 @@ import {
   LAY_THONG_TIN_NGUOI_DUNG_USER,
   SET_DANH_SACH_NGUOI_DUNG,
   SET_LOAI_NGUOI_DUNG,
-  SET_THONG_TIN_NGUOI_DUNG
+  SET_THONG_TIN_NGUOI_DUNG,
+  TOGGLE_EDIT
 } from "../const/settingConst";
 
 let user = {};
@@ -19,6 +20,7 @@ if (localStorage.getItem(USER_LOGIN)) {
 const initialState = {
   userLogin: user,
   thongTinNguoiDung: {},
+  thongTinNguoiDungDefault: {},
   arrUser: [
     {
       taiKhoan: "",
@@ -31,7 +33,8 @@ const initialState = {
   ],
   arrUserDefault: [],
   arrTypeUser: [],
-  thongTinNguoiDungUser: {}
+  thongTinNguoiDungUser: {},
+  editUser: false,
 };
 
 export const QuanLyNguoiDungReducer = (state = initialState, action) => {
@@ -47,6 +50,7 @@ export const QuanLyNguoiDungReducer = (state = initialState, action) => {
 
     case SET_THONG_TIN_NGUOI_DUNG:
       state.thongTinNguoiDung = action.thongTinNguoiDung;
+      state.thongTinNguoiDungDefault = state.thongTinNguoiDung;
       return { ...state };
 
     case SET_DANH_SACH_NGUOI_DUNG:
@@ -62,6 +66,10 @@ export const QuanLyNguoiDungReducer = (state = initialState, action) => {
 
     case LAY_THONG_TIN_NGUOI_DUNG_USER:
     state.thongTinNguoiDungUser = action.thongTinNguoiDungUser;
+    return { ...state };
+
+    case TOGGLE_EDIT:
+    state.editUser = action.editUser;
     return { ...state };
 
     default:

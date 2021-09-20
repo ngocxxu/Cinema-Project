@@ -11,10 +11,7 @@ export class QuanLyNguoiDungService extends baseService {
     //trả về promise
     return this.post(`/api/QuanLyNguoiDung/DangNhap`,thongTinDangNhap)
   }
-  layThongTinNguoiDung = (taiKhoan='')=>{
-    if(taiKhoan.trim() !==''){
-      return this.post(`/api/QuanLyNguoiDung/ThongTinTaiKhoan?taiKhoan=${taiKhoan}`)
-    }
+  layThongTinNguoiDung = ()=>{
     return this.post(`/api/QuanLyNguoiDung/ThongTinTaiKhoan`)
   }
   dangKyNguoiDung = (formDangKy)=>{

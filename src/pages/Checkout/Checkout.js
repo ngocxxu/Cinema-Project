@@ -59,7 +59,7 @@ function Checkout(props) {
     //"loadDanhSachGheDaDat" này kết nối tới Backend, giống saga, gửi action để saga lắng nge thực hiện
     //nó đc kích hoạt tự động để báo cáo rằng đang có 1 user khác đang đặt vé
     connection.on("loadDanhSachGheDaDat", (dsGheKhachDat) => {
-      console.log("danhSachGheKhachDat", dsGheKhachDat);
+      // console.log("danhSachGheKhachDat", dsGheKhachDat);
       //bước 1: loại user của mình ra khỏi danh sách
       dsGheKhachDat = dsGheKhachDat.filter(
         (item) => item.taiKhoan !== userLogin.taiKhoan
@@ -419,6 +419,7 @@ function KetQuaDatVe(props) {
     });
   };
   useEffect(() => {
+    // console.log
     dispatch(layThongTinNguoiDungAction());
   }, []);
   return (

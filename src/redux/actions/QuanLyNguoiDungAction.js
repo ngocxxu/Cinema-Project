@@ -27,12 +27,11 @@ export const dangNhapAction = (thongTinDangNhap) => {
     }
   };
 };
-export const layThongTinNguoiDungAction = (taiKhoan = "") => {
+export const layThongTinNguoiDungAction = () => {
   return async (dispatch) => {
+    // console.log('hello')
     try {
-      const result = await quanLyNguoiDungService.layThongTinNguoiDung(
-        taiKhoan
-      );
+      const result = await quanLyNguoiDungService.layThongTinNguoiDung();
       console.log(result);
       if (result.status === 200) {
         dispatch({
@@ -123,7 +122,11 @@ export const capNhatThongTinNguoiDungAction = (formDangKy) => {
       alert('Update success!')
       if (result.status === 200) {
         dispatch(layThongTinNguoiDungAction());
-        history.push("/admin/users")
+        if(formDangKy.maLoaiNguoiDung === 'QuanTri'){
+          history.push("/admin/users")
+        }else{
+          // window.location.reload()
+        }
       }
     } catch (err) {
       console.log("err", err);

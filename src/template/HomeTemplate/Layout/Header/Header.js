@@ -118,18 +118,18 @@ export default function Header(props) {
           <li className="flex">
             <NavLink
               activeClassName="border-b-2 border-white"
-              to="/aboutme"
+              to="/profile"
               href="#"
               className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-white"
             >
-              About me
+              Profile
             </NavLink>
           </li>
         </ul>
         <div className="items-center flex-shrink-0 hidden lg:flex">
           {renderLogin()}
           {/* {t('hello.1')} */}
-          <div>
+          {/* <div>
             <Select
               defaultValue="English"
               style={{ width: 120 }}
@@ -139,7 +139,7 @@ export default function Header(props) {
               <Option value="vi">Vietnam</Option>
               <Option value="chi">China</Option>
             </Select>
-          </div>
+          </div> */}
         </div>
         <button className="p-4 lg:hidden">
           <svg

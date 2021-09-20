@@ -11,9 +11,9 @@ export default function HomeTemplate(props) {
 
   const {Component,...restRoute} = props;
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  })
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // })
 
   return (
     <Route {...restRoute} render={(propsRoute)=>{

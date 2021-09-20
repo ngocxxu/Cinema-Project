@@ -1,4 +1,4 @@
-import { GROUPID, TOKEN } from "../util/setting/config";
+import { GROUPID, TOKEN, TOKEN_CYBER } from "../util/setting/config";
 import { ThongTinDatVe } from "../_core/models/ThongTinDatVe";
 import { baseService } from "./baseService";
 import Axios from "axios";
@@ -18,20 +18,20 @@ export class QuanLyDatVeService extends baseService {
   layChiTietPhongVe = (maLichChieu) => {
     console.log("maLichChieuSevice",maLichChieu)
     return Axios({
-      url: `http://movieapi.cyberlearn.vn/api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${maLichChieu}`,
+      url: `https://movienew.cybersoft.edu.vn/api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${maLichChieu}`,
       method: "GET",
       data: maLichChieu,
-      headers: { Authorization: "Bearer " + localStorage.getItem(TOKEN) }, //JWT
+      headers: { Authorization: "Bearer " + localStorage.getItem(TOKEN), 'TokenCybersoft': TOKEN_CYBER }, //JWT
     });
   };
 
   datVe = (thongTinDatVe) => {
     return Axios({
-      url: `http://movieapi.cyberlearn.vn/api/QuanLyDatVe/DatVe`,
+      url: `https://movienew.cybersoft.edu.vn/api/QuanLyDatVe/DatVe`,
       method: "POST",
       data: (thongTinDatVe),
 
-      headers: { Authorization: "Bearer " + localStorage.getItem(TOKEN) }, //JWT
+      headers: { Authorization: "Bearer " + localStorage.getItem(TOKEN) , 'TokenCybersoft': TOKEN_CYBER}, //JWT
     });
   };
 
