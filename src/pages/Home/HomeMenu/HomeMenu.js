@@ -19,6 +19,7 @@ export default function HomeMenu(props) {
     return heThongRapChieu.map((heThongRap, index) => {
       return (
         <TabPane
+        className="text-white"
           tab={
             <img
               src={heThongRap.logo}
@@ -33,10 +34,9 @@ export default function HomeMenu(props) {
               return (
                 <TabPane
                   tab={
-                    <div className="flex " style={{ width: "300px" }}>
+                    <div className="flex text-white mr-4" style={{ width: "300px" }}>
                       <img
                         src="http://megaman.com.vn/uploads/project/2019_05/e5dfa9d51546fb18a257.jpg?1557198680018"
-                        className=""
                         width="70"
                       ></img>
                       <div className="text-left ml-2">
@@ -50,7 +50,7 @@ export default function HomeMenu(props) {
                   {cumRap.danhSachPhim.map((phim, index) => {
                     return (
                       <Fragment key={index}>
-                        <div className="flex my-2">
+                        <div className="flex my-2 text-white">
                           <div className="flex">
                             <img
                               onError={(e) => {
@@ -62,7 +62,7 @@ export default function HomeMenu(props) {
                               alt={phim.tenPhim}
                             ></img>
                             <div className="ml-2">
-                              <h2 className="text-xl ">{phim.tenPhim}</h2>
+                              <h2 className="text-xl text-white">{phim.tenPhim}</h2>
                               <p>{cumRap.diaChi}</p>
                               <div className="grid grid-cols-7 gap-4">
                                 {phim.lstLichChieuTheoPhim
@@ -70,7 +70,7 @@ export default function HomeMenu(props) {
                                   .map((lichChieu, index) => {
                                     return (
                                       <NavLink
-                                        className="text-lg "
+                                        className="text-lg p-1 bg-white rounded text-red-800"
                                         to={`/checkout/${lichChieu.maLichChieu}`}
                                         key={index}
                                       >

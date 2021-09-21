@@ -54,7 +54,7 @@ export default function Header(props) {
               localStorage.removeItem(USER_LOGIN);
               localStorage.removeItem(TOKEN);
               //reload để redux render lại datta rỗng
-              window.location.reload(); 
+              window.location.reload();
             }}
           >
             Sign out
@@ -68,6 +68,9 @@ export default function Header(props) {
     <header className="z-20 opacity-95 bg-green-700 text-coolGray-800 fixed w-full text-white ">
       <div className="container flex justify-between h-16 mx-auto">
         <NavLink
+          onClick={() => {
+            window.scrollTo(0, 0);
+          }}
           to="/"
           href="#"
           aria-label="Back to homepage"
@@ -87,6 +90,9 @@ export default function Header(props) {
         <ul className="items-stretch hidden space-x-3 lg:flex">
           <li className="flex mt-2">
             <NavLink
+              onClick={() => {
+                window.scrollTo(0, 0);
+              }}
               activeClassName="active border-b-2 border-white"
               to="/home"
               href="#"
@@ -97,7 +103,10 @@ export default function Header(props) {
           </li>
           <li className="flex mt-2">
             <NavLink
-            activeStyle={{ borderBottom:'1rem', borderColor:'#fff' }}
+              onClick={() => {
+                window.scrollTo(0, 0);
+              }}
+              activeStyle={{ borderBottom: "1rem", borderColor: "#fff" }}
               // activeClassName="active border-b-2 border-white"
               to="/news"
               href="#"
@@ -108,6 +117,9 @@ export default function Header(props) {
           </li>
           <li className="flex mt-2">
             <NavLink
+              onClick={() => {
+                window.scrollTo(0, 0);
+              }}
               activeClassName="border-b-2 border-white"
               to="/contact"
               href="#"
@@ -118,6 +130,9 @@ export default function Header(props) {
           </li>
           <li className="flex mt-2">
             <NavLink
+              onClick={() => {
+                window.scrollTo(0, 0);
+              }}
               activeClassName="border-b-2 border-white"
               to="/profile"
               href="#"
@@ -128,6 +143,9 @@ export default function Header(props) {
           </li>
           <li className="flex mt-2">
             <NavLink
+              onClick={() => {
+                window.scrollTo(0, 0);
+              }}
               activeClassName="border-b-2 border-white"
               to="/admin"
               href="#"

@@ -22,6 +22,8 @@ export default function Detail(props) {
     //bóc tách giá trị id từ url
     let { id } = props.match.params;
     dispatch(layThongTinChiTietPhimAction(id));
+    window.scrollTo(0, 0);
+
   }, []);
 
   return (

@@ -36,8 +36,8 @@ export default function Home(props) {
           <MultipleRowSlickkk arrFilm={arrFilm}></MultipleRowSlickkk>
         </div>
       </section>
-      <div className="mx-36">
-        <HomeMenu heThongRapChieu={heThongRapChieu} />
+      <div className="mx-36 mb-40 p-4  bg-green-600 rounded shadow-2xl">
+        <HomeMenu  heThongRapChieu={heThongRapChieu} />
       </div>
     </div>
   );

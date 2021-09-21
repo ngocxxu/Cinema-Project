@@ -1,6 +1,8 @@
 import { quanLyNguoiDungService } from "../../services/QuanLyNguoiDungService";
 import {
   DANG_NHAP_ACTION,
+  DISPLAY_LOADING,
+  HIDE_LOADING,
   LAY_THONG_TIN_NGUOI_DUNG_USER,
   SET_DANH_SACH_NGUOI_DUNG,
   SET_LOAI_NGUOI_DUNG,
@@ -11,6 +13,9 @@ import { notificationFunction } from "../../template/HomeTemplate/Layout/Notify/
 export const dangNhapAction = (thongTinDangNhap) => {
   return async (dispatch) => {
     try {
+      dispatch({
+        type: DISPLAY_LOADING
+      });
       const result = await quanLyNguoiDungService.dangNhapNguoiDung(
         thongTinDangNhap
       );
@@ -23,8 +28,14 @@ export const dangNhapAction = (thongTinDangNhap) => {
         //login thành công thì chuyển về trang trc đó
         history.push("/");
       }
+      await dispatch({
+        type: HIDE_LOADING
+      });
     } catch (err) {
       console.log("err", err);
+      dispatch({
+        type: HIDE_LOADING
+      });
     }
   };
 };
@@ -53,7 +64,7 @@ export const dangKyAction = (formDangKy) => {
       const result = await quanLyNguoiDungService.dangKyNguoiDung(formDangKy);
       console.log({ result });
       notificationFunction("success", "Register is successful");
-        history.push("/login");
+      history.push("/login");
     } catch (err) {
       notificationFunction("error", "Register is unsuccessful");
       console.log("err", err.response?.data);
@@ -103,7 +114,7 @@ export const layDanhSachLoaiNguoiDungAction = () => {
   return async (dispatch) => {
     try {
       const result = await quanLyNguoiDungService.layDanhSachLoaiNguoiDung();
-      console.log({result});
+      console.log({ result });
       if (result.status === 200) {
         dispatch({
           type: SET_LOAI_NGUOI_DUNG,
@@ -120,21 +131,35 @@ export const layDanhSachLoaiNguoiDungAction = () => {
 export const capNhatThongTinNguoiDungAction = (formDangKy) => {
   return async (dispatch) => {
     try {
-      const result = await quanLyNguoiDungService.capNhatThongTinNguoiDung(formDangKy);
-      console.log({result});
+      dispatch({
+        type: DISPLAY_LOADING
+      });
+
+      const result = await quanLyNguoiDungService.capNhatThongTinNguoiDung(
+        formDangKy
+      );
+      console.log({ result });
       notificationFunction("success", "Update is successful");
       if (result.status === 200) {
         dispatch(layThongTinNguoiDungAction());
-        if(formDangKy.maLoaiNguoiDung === 'QuanTri'){
-          history.push("/admin/users")
-        }else{
+        if (formDangKy.maLoaiNguoiDung === "QuanTri") {
+          history.push("/admin/users");
+        } else {
           // window.location.reload()
         }
       }
+      await dispatch({
+        type: HIDE_LOADING
+      });
+
     } catch (err) {
       notificationFunction("error", "Update is unsuccessful");
       console.log("err", err);
       console.log("err", err.response?.data);
+       dispatch({
+        type: HIDE_LOADING
+      });
+
     }
   };
 };
@@ -142,25 +167,40 @@ export const capNhatThongTinNguoiDungAction = (formDangKy) => {
 export const themNguoiDungAction = (formDangKy) => {
   return async (dispatch) => {
     try {
+       dispatch({
+        type: DISPLAY_LOADING
+      });
+
       const result = await quanLyNguoiDungService.themNguoiDung(formDangKy);
-      console.log({result});
+      console.log({ result });
       notificationFunction("success", "Add User is successful");
       if (result.status === 200) {
         dispatch(layThongTinNguoiDungAction());
       }
+      await dispatch({
+        type: HIDE_LOADING
+      });
+
     } catch (err) {
       notificationFunction("error", "Add User is unsuccessful");
       console.log("err", err);
       console.log("err", err.response?.data);
+       dispatch({
+        type: HIDE_LOADING
+      });
+
     }
+    
   };
 };
 
 export const layThongTinNguoiDungUserAction = (taiKhoan) => {
   return async (dispatch) => {
     try {
-      const result = await quanLyNguoiDungService.layThongTinNguoiDungUser(taiKhoan);
-      console.log({result});
+      const result = await quanLyNguoiDungService.layThongTinNguoiDungUser(
+        taiKhoan
+      );
+      console.log({ result });
       if (result.status === 200) {
         dispatch({
           type: LAY_THONG_TIN_NGUOI_DUNG_USER,
