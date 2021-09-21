@@ -161,12 +161,9 @@ const Edit = (props) => {
         <Form.Item label="Hot">
           <Switch name="hot" onChange={handleChangeSwitch('hot')} checked={formik.values.hot} />
         </Form.Item>
-
-
         <Form.Item label="Star Rating">
           <InputNumber onChange={handleChangeInputNumber('danhGia')} value={formik.values.danhGia} />
         </Form.Item>
-
         <Form.Item label="Picture">
           <input type="file" onChange={handleChangeFile} accept="image/png, image/jpeg,image/gif,image/png" />
           <br />

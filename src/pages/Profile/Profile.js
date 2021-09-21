@@ -410,7 +410,7 @@ export default function Profile(props) {
                   >
                     Password
                   </label>
-                  <span>{thongTinNguoiDungDefault.matKhau}</span>
+                  <span>******</span>
                 </div>
                 <div className="mb-4">
                   <label

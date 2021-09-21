@@ -1,4 +1,4 @@
-import { SET_CAROUSEL } from "../const/settingConst";
+import { SET_CAROUSEL, SHOW_MODAL } from "../const/settingConst";
 
 const initialState = {
   arrImg: [
@@ -8,6 +8,7 @@ const initialState = {
       hinhAnh: "https://movienew.cybersoft.edu.vn/hinhanh/ban-tay-diet-quy.png",
     },
   ],
+  showModal: false,
 };
 
 export const CarouselReducer = (state = initialState, action) => {
@@ -15,6 +16,10 @@ export const CarouselReducer = (state = initialState, action) => {
     case SET_CAROUSEL:
       state.arrImg = action.arrImg;
       return { ...state };
+
+  case SHOW_MODAL:
+    state.showModal = action.showModal;
+    return { ...state };
 
     default:
       return state;
