@@ -366,7 +366,7 @@ export default function CheckoutTab (props) {
         <TabPane tab="02 BOOKING TICKET RESULT" key="2">
           <KetQuaDatVe {...props}></KetQuaDatVe>
         </TabPane>
-        <TabPane tab={<NavLink className='mx-auto' to='/'><HomeOutlined /></NavLink>} key="0">
+        <TabPane tab={<NavLink className='mx-auto text-4xl' to='/'><HomeOutlined /></NavLink>} key="0">
         </TabPane>
       </Tabs>
     </div>

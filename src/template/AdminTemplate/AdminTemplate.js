@@ -34,12 +34,12 @@ export default function AdminTemplate(props) {
   });
 
   if(!localStorage.getItem(USER_LOGIN)){
-    alert('You do not have permission into the page')
-    return <Redirect to='/'></Redirect>
+    alert('You have to Sign-in first to get into this page')
+    return <Redirect to='/login'></Redirect>
   }
 
   if(userLogin.maLoaiNguoiDung !== 'QuanTri'){
-    alert('You do not have permission into the page')
+    alert('You do not have permission into the admin page. Please use this account as below to get into.                            Username: master & Password: 123456')
     return <Redirect to='/'></Redirect>
   }
 
@@ -86,7 +86,9 @@ export default function AdminTemplate(props) {
           <Fragment>
             <Layout style={{ minHeight: "100vh" }}>
               <Sider collapsible collapsed={collapse} onCollapse={onCollapse}>
-                <div className="logo">
+                <div onClick={()=>{
+                  history.push("/home");
+                }} className="logo cursor-pointer">
                   <img src={zupi} alt="zupi"></img>
                 </div>
                 <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">

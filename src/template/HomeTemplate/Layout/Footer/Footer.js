@@ -12,8 +12,8 @@ export default function Footer(props) {
 
   return (
     <footer
-      className="py-6 bg-coolGray-100 text-coolGray-900 text-white"
-      style={{ backgroundColor: "#00796b" }}
+      className="py-6 bg-green-700 text-coolGray-900 text-white"
+      
     >
       <div className="container px-6 mx-auto space-y-6 divide-y divide-gray-400 md:space-y-12 divide-opacity-50">
         <div className="grid grid-cols-12">
@@ -138,6 +138,7 @@ export default function Footer(props) {
           </div>
         </div>
       </div>
+      
     </footer>
   );
 }

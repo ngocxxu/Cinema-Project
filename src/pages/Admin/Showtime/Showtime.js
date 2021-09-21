@@ -8,6 +8,7 @@ import { quanLyRapService } from "../../../services/QuanLyRapService";
 import { useFormik } from "formik";
 import moment from "moment";
 import { quanLyDatVeService } from "../../../services/QuanLyDatVeService";
+import { notificationFunction } from "../../../template/HomeTemplate/Layout/Notify/Notification";
 
 const { RangePicker } = DatePicker;
 
@@ -23,7 +24,7 @@ export default function Showtime(props) {
       // console.log("values",values)
       try{
         const result = await quanLyDatVeService.taoLichChieu(values)
-        alert(result.data.content)
+        notificationFunction("success", "Creating Calendar is successful");
       }catch(err){console.log('err', err.response?.data)}
     }
   });
@@ -95,7 +96,7 @@ export default function Showtime(props) {
         //   remember: true,
         // }}
       >
-        <h3 className="text-2xl">Calendar Creating - {props.match.params.tenPhim}</h3>
+        <h3 className="text-2xl">Creating Calendar - {props.match.params.tenPhim}</h3>
         <img src={film.hinhAnh} alt='...' width={200} height={200} />
         <Form.Item label="Cinema System">
           <Select

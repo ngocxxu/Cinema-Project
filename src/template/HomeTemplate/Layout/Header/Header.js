@@ -23,17 +23,17 @@ export default function Header(props) {
             onClick={() => {
               history.push("/login");
             }}
-            className="self-center px-8 py-3 rounded font-semibold"
+            className="self-center px-4 py-3 rounded font-semibold"
           >
-            {t("signin")}
+            Sign in
           </button>
           <button
             onClick={() => {
               history.push("/register");
             }}
-            className="self-center px-8 py-3 font-semibold rounded bg-violet-600 text-coolGray-50"
+            className="self-center px-4 py-3 font-semibold rounded bg-violet-600 text-coolGray-50"
           >
-            {t("signup")}
+            Sign up
           </button>
         </Fragment>
       );
@@ -65,7 +65,7 @@ export default function Header(props) {
   };
 
   return (
-    <header className="z-20 p-4 bg-coolGray-100 text-coolGray-800 fixed w-full text-white bg-opacity-50 bg-black">
+    <header className="z-20 opacity-95 bg-green-700 text-coolGray-800 fixed w-full text-white ">
       <div className="container flex justify-between h-16 mx-auto">
         <NavLink
           to="/"
@@ -85,44 +85,55 @@ export default function Header(props) {
         </NavLink>
 
         <ul className="items-stretch hidden space-x-3 lg:flex">
-          <li className="flex">
+          <li className="flex mt-2">
             <NavLink
-              activeClassName="border-b-2 border-white"
+              activeClassName="active border-b-2 border-white"
               to="/home"
               href="#"
-              className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-violet-600 border-violet-600 text-white"
+              className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-violet-600 border-violet-600 text-white hover:bg-indigo-600 rounded hover:text-white"
             >
               Home
             </NavLink>
           </li>
-          <li className="flex">
+          <li className="flex mt-2">
             <NavLink
-              activeClassName="border-b-2 border-white"
+            activeStyle={{ borderBottom:'1rem', borderColor:'#fff' }}
+              // activeClassName="active border-b-2 border-white"
               to="/news"
               href="#"
-              className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-white"
+              className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-white hover:bg-indigo-600 rounded hover:text-white"
             >
               News
             </NavLink>
           </li>
-          <li className="flex">
+          <li className="flex mt-2">
             <NavLink
               activeClassName="border-b-2 border-white"
               to="/contact"
               href="#"
-              className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-white"
+              className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-white hover:bg-indigo-600 rounded hover:text-white"
             >
               Contact
             </NavLink>
           </li>
-          <li className="flex">
+          <li className="flex mt-2">
             <NavLink
               activeClassName="border-b-2 border-white"
               to="/profile"
               href="#"
-              className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-white"
+              className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-white hover:bg-indigo-600 rounded hover:text-white"
             >
               Profile
+            </NavLink>
+          </li>
+          <li className="flex mt-2">
+            <NavLink
+              activeClassName="border-b-2 border-white"
+              to="/admin"
+              href="#"
+              className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-white hover:bg-indigo-600 rounded hover:text-white"
+            >
+              Admin
             </NavLink>
           </li>
         </ul>

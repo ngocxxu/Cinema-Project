@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getCarouselAction } from "../../../../redux/actions/CarouselAction";
 import './HomeCarousel.css'
 const contentStyle = {
-  height: "700px",
+  height: "900px",
   color: "#fff",
   lineHeight: "160px",
   textAlign: "center",
@@ -32,8 +32,8 @@ export default function HomeCarousel(props) {
     return arrImg.map((item, index) => {
       return (
         <div key={index}>
-          <div
-            className=""
+          <div 
+            className="h-full w-full"
             style={{ ...contentStyle, backgroundImage: `url(${item.hinhAnh})` }}
           >
           </div>
@@ -42,5 +42,5 @@ export default function HomeCarousel(props) {
     });
   };
 
-  return <Carousel effect="fade">{renderImg()}</Carousel>;
+  return <Carousel autoplay effect="fade">{renderImg()}</Carousel>;
 }

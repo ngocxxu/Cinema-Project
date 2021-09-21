@@ -8,8 +8,9 @@ import {
 import _ from "lodash";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { GROUPID } from "../../util/setting/config";
+import { GROUPID, USER_LOGIN } from "../../util/setting/config";
 import { TOGGLE_EDIT } from "../../redux/const/settingConst";
+import { Redirect } from "react-router";
 
 export default function Profile(props) {
   // const [stateEdit, setStateEdit] = useState(false);
@@ -22,6 +23,7 @@ export default function Profile(props) {
   // const {danhSachGhe} = thongTinDatVe
   console.log({ thongTinNguoiDungDefault });
   const dispatch = useDispatch();
+
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -234,6 +236,11 @@ export default function Profile(props) {
   useEffect(() => {
     dispatch(layThongTinNguoiDungAction());
   }, []);
+
+  if(!localStorage.getItem(USER_LOGIN)){
+    alert('You have to Sign-in first to get into this page')
+    return <Redirect to='/login'></Redirect>
+  }
 
   return (
     <div>
