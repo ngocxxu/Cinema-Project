@@ -13,7 +13,7 @@ A sample contact us page form written with tailwind css
 Illustration from undraw.co by the amazing Katerina Limpitsouni
 */}
       <div className="bg-gray-800 text-gray-100 px-8 py-12">
-        <div className="text-center w-full">
+        <div className="text-center w-full pt-28">
           <svg
             className="text-gray-100 h-8 mx-auto"
             fill="currentColor"
@@ -60,10 +60,10 @@ Illustration from undraw.co by the amazing Katerina Limpitsouni
           <div className="flex flex-col justify-between">
             <div>
               <h2 className="text-4xl lg:text-5xl font-bold leading-tight">
-                Lets talk about everything!
+                Lets talk about my project!
               </h2>
               <div className="text-gray-700 mt-8">
-                Hate forms? Send us an <span className="underline">email</span>{" "}
+                Do you like it? Send me an <span className="underline">email</span>{" "}
                 instead.
               </div>
             </div>

@@ -98,21 +98,21 @@ export default function Header(props) {
           <li className="flex">
             <NavLink
               activeClassName="border-b-2 border-white"
-              to="/contact"
-              href="#"
-              className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-white"
-            >
-              Contact
-            </NavLink>
-          </li>
-          <li className="flex">
-            <NavLink
-              activeClassName="border-b-2 border-white"
               to="/news"
               href="#"
               className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-white"
             >
               News
+            </NavLink>
+          </li>
+          <li className="flex">
+            <NavLink
+              activeClassName="border-b-2 border-white"
+              to="/contact"
+              href="#"
+              className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-white"
+            >
+              Contact
             </NavLink>
           </li>
           <li className="flex">

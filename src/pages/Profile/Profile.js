@@ -64,7 +64,7 @@ export default function Profile(props) {
         type: TOGGLE_EDIT,
         editUser: false
       });
-}
+    }
   });
 
   const renderCardTicket = () => {
@@ -250,8 +250,8 @@ export default function Profile(props) {
               Zupi Cinema
             </h1>
             <div
-              className="capitalize leading-loose text-center h-32 w-32 rounded-full bg-indigo-400 object-cover mt-2 mb-6 text-white text-6xl transition
-				duration-500 ease-in-out"
+              className="capitalize  text-center h-32 w-32 rounded-full bg-indigo-400 object-cover mt-2 mb-6 text-white text-6xl transition
+				duration-500 ease-in-out" style={{lineHeight: '2'}}
             >
               {thongTinNguoiDungDefault.taiKhoan?.slice(0, 1)}
             </div>
@@ -269,7 +269,7 @@ export default function Profile(props) {
                   });
                 }}
                 type="button"
-                className="rounded bg-green-500 hover:bg-green-600 text-white p-2"
+                className="rounded bg-green-500 hover:bg-green-600 text-white px-3"
               >
                 Edit
               </button>
@@ -288,6 +288,11 @@ export default function Profile(props) {
                     placeholder="Username"
                     name="taiKhoan"
                   />
+                  {formik.errors.taiKhoan && formik.touched.taiKhoan ? (
+                    <div className="text-red-500">{formik.errors.taiKhoan}</div>
+                  ) : (
+                    ""
+                  )}
                 </div>
                 <div className="mb-4">
                   <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -299,7 +304,13 @@ export default function Profile(props) {
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     placeholder="Password"
                     name="matKhau"
+                    type='password'
                   />
+                  {formik.errors.matKhau && formik.touched.matKhau ? (
+                    <div className="text-red-500">{formik.errors.matKhau}</div>
+                  ) : (
+                    ""
+                  )}
                 </div>
                 <div className="mb-4">
                   <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -312,6 +323,11 @@ export default function Profile(props) {
                     placeholder="Name"
                     name="hoTen"
                   />
+                  {formik.errors.hoTen && formik.touched.hoTen ? (
+                    <div className="text-red-500">{formik.errors.hoTen}</div>
+                  ) : (
+                    ""
+                  )}
                 </div>
                 <div className="mb-4">
                   <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -324,6 +340,11 @@ export default function Profile(props) {
                     name="email"
                     value={formik.values.email}
                   />
+                  {formik.errors.email && formik.touched.email ? (
+                    <div className="text-red-500">{formik.errors.email}</div>
+                  ) : (
+                    ""
+                  )}
                 </div>
                 <div className="mb-4">
                   <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -336,6 +357,11 @@ export default function Profile(props) {
                     name="soDt"
                     value={formik.values.soDt}
                   />
+                  {formik.errors.soDt && formik.touched.soDt ? (
+                    <div className="text-red-500">{formik.errors.soDt}</div>
+                  ) : (
+                    ""
+                  )}
                 </div>
                 <div>
                   <button
@@ -418,7 +444,9 @@ export default function Profile(props) {
             className="px-24 py-12 text-gray-700 dark:text-gray-500 transition
 			duration-500 ease-in-out"
           >
-            <h2 className="text-4xl font-medium text-white">Booking Ticket History</h2>
+            <h2 className="text-4xl font-medium text-white">
+              Booking Ticket History
+            </h2>
             <div className="mt-1 mb-4 flex items-center justify-between">
               <span className="text-sm text-white">
                 <strong>Hope you enjoy day!</strong>

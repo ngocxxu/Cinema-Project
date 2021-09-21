@@ -25,6 +25,7 @@ import AddNew from "./pages/Admin/Films/AddNew/AddNew";
 import Edit from "./pages/Admin/Films/Edit/Edit";
 import AddNewUser from "./pages/Admin/Users/AddNewUser/AddNewUser";
 import EditUser from "./pages/Admin/Users/EditUser/EditUser";
+import "@material-tailwind/react/tailwind.css";
 
 //delay load trang cho html để giao diện hiện ra full, giống như delay api
 //lấy CheckoutTemplateLazy bọc CheckoutTemplate

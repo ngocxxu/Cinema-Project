@@ -7,6 +7,7 @@ import {
   SET_THONG_TIN_NGUOI_DUNG
 } from "../const/settingConst";
 import { history } from "../../App";
+import { notificationFunction } from "../../template/HomeTemplate/Layout/Notify/Notification";
 export const dangNhapAction = (thongTinDangNhap) => {
   return async (dispatch) => {
     try {
@@ -51,9 +52,10 @@ export const dangKyAction = (formDangKy) => {
     try {
       const result = await quanLyNguoiDungService.dangKyNguoiDung(formDangKy);
       console.log({ result });
-      alert('Create is success')
+      notificationFunction("success", "Register is successful");
         history.push("/login");
     } catch (err) {
+      notificationFunction("error", "Register is unsuccessful");
       console.log("err", err.response?.data);
     }
   };
@@ -85,10 +87,11 @@ export const xoaNguoiDungAction = (taiKhoan) => {
     try {
       const result = await quanLyNguoiDungService.xoaNguoiDung(taiKhoan);
       console.log("result", result);
-      alert("Delete success!");
+      notificationFunction("success", "Delete is successful");
 
       dispatch(layDanhSachNguoiDungAction());
     } catch (err) {
+      notificationFunction("error", "Delete is unsuccessful");
       console.log("err", err);
       console.log("err", err.response?.data);
     }
@@ -119,7 +122,7 @@ export const capNhatThongTinNguoiDungAction = (formDangKy) => {
     try {
       const result = await quanLyNguoiDungService.capNhatThongTinNguoiDung(formDangKy);
       console.log({result});
-      alert('Update success!')
+      notificationFunction("success", "Update is successful");
       if (result.status === 200) {
         dispatch(layThongTinNguoiDungAction());
         if(formDangKy.maLoaiNguoiDung === 'QuanTri'){
@@ -129,6 +132,7 @@ export const capNhatThongTinNguoiDungAction = (formDangKy) => {
         }
       }
     } catch (err) {
+      notificationFunction("error", "Update is unsuccessful");
       console.log("err", err);
       console.log("err", err.response?.data);
     }
@@ -140,10 +144,12 @@ export const themNguoiDungAction = (formDangKy) => {
     try {
       const result = await quanLyNguoiDungService.themNguoiDung(formDangKy);
       console.log({result});
+      notificationFunction("success", "Add User is successful");
       if (result.status === 200) {
         dispatch(layThongTinNguoiDungAction());
       }
     } catch (err) {
+      notificationFunction("error", "Add User is unsuccessful");
       console.log("err", err);
       console.log("err", err.response?.data);
     }

@@ -16,7 +16,7 @@
 
 .gheDangDat{
   background-color: rgb(18,176,18) !important;
-  cursor: no-drop;
+  /* cursor: no-drop; */
 }
 
 .gheVip{

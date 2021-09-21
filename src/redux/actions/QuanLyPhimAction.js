@@ -2,6 +2,7 @@ import React from 'react'
 import { quanLyPhimService } from '../../services/QuanLyPhimService'
 import { SET_DANH_SACH_PHIM, SET_THONG_TIN_PHIM } from '../const/settingConst';
 import {history} from '../../App'
+import { notificationFunction } from '../../template/HomeTemplate/Layout/Notify/Notification';
 
 
 
@@ -23,10 +24,13 @@ export const themPhimUploadHinhAction =(formData)=>{
     try{
       const result = await quanLyPhimService.themPhimUploadHinh(formData);
       console.log({result})
+      notificationFunction("success", "Add Film is successful");
       history.push('/admin/films')
 
 
-    }catch(err){console.log('err',err)}
+    }catch(err){
+      notificationFunction("error", "Add Film is unsuccessful");
+      console.log('err',err)}
   }
 }
 
@@ -48,14 +52,15 @@ export const capNhatPhimUploadAction = (formData) => {
   return async (dispatch) => {
       try {
           let result = await quanLyPhimService.capNhatPhimUpload(formData);
-          alert('Update success!')
+          notificationFunction("success", "Update is successful");
           console.log('result', result.data.content);
 
           dispatch(layDanhSachPhimAction());
           history.push('/admin/films');
           
       } catch (errors) {
-          console.log(errors.response?.data)
+        notificationFunction("error", "Update is unsuccessful");
+        console.log(errors.response?.data)
       }
   }
 }
@@ -65,13 +70,14 @@ export const xoaPhimAction = (maPhim) => {
       try {
           let result = await quanLyPhimService.xoaPhim(maPhim);
           console.log('result', result.data.content);
-          alert('Delete success!')
+          notificationFunction("success", "Delete is successful");
 
 
           dispatch(layDanhSachPhimAction());
           
       } catch (errors) {
-          console.log(errors.response?.data)
+        notificationFunction("error", "Delete is unsuccessful");
+        console.log(errors.response?.data)
       }
   }
 }

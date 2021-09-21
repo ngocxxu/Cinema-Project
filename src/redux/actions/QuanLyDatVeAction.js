@@ -12,6 +12,7 @@ import { history } from "../../App";
 import { quanLyDatVeService } from "../../services/QuanLyDatVeService";
 import { ThongTinDatVe } from "../../_core/models/ThongTinDatVe";
 import { connection } from "../../index";
+import { notificationFunction } from "../../template/HomeTemplate/Layout/Notify/Notification";
 
 export const layChiTietPhongVeAction = (maLichChieu) => {
   // console.log("maLichChieuAction",maLichChieu)
@@ -44,7 +45,7 @@ export const datVeAction = (thongTinDatVe) => {
         (thongTinDatVe)
       );
       console.log("datVeAction", result);
-
+      notificationFunction("success", "Booking Ticket is successful");
       //đặt vé thành công, gọi api load lại trang phòng vé
       await dispatch(layChiTietPhongVeAction(thongTinDatVe.maLichChieu));
       await dispatch({
@@ -63,6 +64,7 @@ export const datVeAction = (thongTinDatVe) => {
 
 
     } catch (error) {
+      notificationFunction("error", "Booking Ticket is unsuccessful");
       console.log("err", error.response.data);
       dispatch({
         type: HIDE_LOADING,
