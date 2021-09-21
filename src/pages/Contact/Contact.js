@@ -1,19 +1,40 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
+import emailjs from "emailjs-com";
+import { notificationFunction } from "../../template/HomeTemplate/Layout/Notify/Notification";
 
 export default function Contact(props) {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  })
+
+    function sendEmail  (e)  {
+      e.preventDefault();
+  
+      emailjs
+        .sendForm(
+          "service_aq7j1ud",
+          "template_i9jmqsu",
+          e.target,
+          "user_M6isEnD29CNuHp9due1g5"
+        )
+        .then(
+          (result) => {
+            console.log(result.text);
+            notificationFunction("success", "Your message has been sent to me");
+          },
+          (error) => {
+            console.log(error.text);
+            notificationFunction("error", "your message has not been sent to me");
+          }
+        );
+    
+  }
+
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // });
 
   return (
-    
     <div>
-      {/* a lot of the lines are just svg text, actual html is simple 
-A sample contact us page form written with tailwind css
-Illustration from undraw.co by the amazing Katerina Limpitsouni
-*/}
       <div className="bg-gray-800 text-gray-100 px-8 py-12">
-        <div className="text-center w-full pt-28">
+        <div className="text-center w-full pt-24">
           <svg
             className="text-gray-100 h-8 mx-auto"
             fill="currentColor"
@@ -63,11 +84,11 @@ Illustration from undraw.co by the amazing Katerina Limpitsouni
                 Lets talk about my project!
               </h2>
               <div className="text-gray-700 mt-8">
-                Do you like it? Send me an <span className="underline">email</span>{" "}
-                instead.
+                Do you like it? Send me an{" "}
+                <span className="underline">email</span> instead.
               </div>
             </div>
-            <div className="mt-8 text-center">
+            <div className="mt-4 text-center">
               <svg
                 className="w-full"
                 xmlns="http://www.w3.org/2000/svg"
@@ -1025,15 +1046,16 @@ Illustration from undraw.co by the amazing Katerina Limpitsouni
               </svg>
             </div>
           </div>
-          <div className>
+          <form onSubmit={sendEmail}>
             <div>
               <span className="uppercase text-sm text-gray-600 font-bold">
-                Full Name
+                Name
               </span>
               <input
                 className="w-full bg-gray-300 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
-                type="text"
                 placeholder
+                type="text"
+                name="user_name"
               />
             </div>
             <div className="mt-8">
@@ -1042,7 +1064,8 @@ Illustration from undraw.co by the amazing Katerina Limpitsouni
               </span>
               <input
                 className="w-full bg-gray-300 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
-                type="text"
+                type="email"
+                name="user_email"
               />
             </div>
             <div className="mt-8">
@@ -1052,14 +1075,20 @@ Illustration from undraw.co by the amazing Katerina Limpitsouni
               <textarea
                 className="w-full h-32 bg-gray-300 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
                 defaultValue={""}
+                name="message"
               />
+              <input className="mt-6 uppercase text-sm font-bold tracking-wide hover:bg-indigo-500 bg-indigo-600 text-gray-100 p-3 rounded-lg w-full focus:outline-none focus:shadow-outline cursor-pointer" type="submit" value="Send Message" />
             </div>
             <div className="mt-8">
-              <button className="uppercase text-sm font-bold tracking-wide bg-indigo-500 text-gray-100 p-3 rounded-lg w-full focus:outline-none focus:shadow-outline">
+              {/* <input
+              value="Send"
+                type="submit"
+                className="uppercase text-sm font-bold tracking-wide bg-indigo-500 text-gray-100 p-3 rounded-lg w-full focus:outline-none focus:shadow-outline"
+              >
                 Send Message
-              </button>
+              </input> */}
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
