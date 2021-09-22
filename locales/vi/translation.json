@@ -1,0 +1,9 @@
+{
+  "hello" : {
+    "1":"Xin Chào",
+    "2":"Chào"
+  },
+  "signin" : "Đăng nhập",
+  "signup" : "Đăng ký"
+
+}

@@ -1,0 +1,36 @@
+{
+  "files": {
+    "main.css": "/Cinema-Project/static/css/main.e01e72df.chunk.css",
+    "main.js": "/Cinema-Project/static/js/main.e0c70cb7.chunk.js",
+    "main.js.map": "/Cinema-Project/static/js/main.e0c70cb7.chunk.js.map",
+    "runtime-main.js": "/Cinema-Project/static/js/runtime-main.b59ae99a.js",
+    "runtime-main.js.map": "/Cinema-Project/static/js/runtime-main.b59ae99a.js.map",
+    "static/css/2.f28fb3b5.chunk.css": "/Cinema-Project/static/css/2.f28fb3b5.chunk.css",
+    "static/js/2.677926d0.chunk.js": "/Cinema-Project/static/js/2.677926d0.chunk.js",
+    "static/js/2.677926d0.chunk.js.map": "/Cinema-Project/static/js/2.677926d0.chunk.js.map",
+    "static/js/3.a4f5fed3.chunk.js": "/Cinema-Project/static/js/3.a4f5fed3.chunk.js",
+    "static/js/3.a4f5fed3.chunk.js.map": "/Cinema-Project/static/js/3.a4f5fed3.chunk.js.map",
+    "index.html": "/Cinema-Project/index.html",
+    "static/css/2.f28fb3b5.chunk.css.map": "/Cinema-Project/static/css/2.f28fb3b5.chunk.css.map",
+    "static/css/main.e01e72df.chunk.css.map": "/Cinema-Project/static/css/main.e01e72df.chunk.css.map",
+    "static/js/2.677926d0.chunk.js.LICENSE.txt": "/Cinema-Project/static/js/2.677926d0.chunk.js.LICENSE.txt",
+    "static/media/bg2.a1f0f6cc.jpg": "/Cinema-Project/static/media/bg2.a1f0f6cc.jpg",
+    "static/media/black.56dcdb0b.jpg": "/Cinema-Project/static/media/black.56dcdb0b.jpg",
+    "static/media/candymannew.7e861601.jpg": "/Cinema-Project/static/media/candymannew.7e861601.jpg",
+    "static/media/cruella.3fb8af87.jpg": "/Cinema-Project/static/media/cruella.3fb8af87.jpg",
+    "static/media/cruellanew.7f701f2e.jpg": "/Cinema-Project/static/media/cruellanew.7f701f2e.jpg",
+    "static/media/getFetch.cjs": "/Cinema-Project/static/media/getFetch.582d29c4.cjs",
+    "static/media/logozupiiiiii.95e2ae1d.png": "/Cinema-Project/static/media/logozupiiiiii.95e2ae1d.png",
+    "static/media/rubik.79b307f2.gif": "/Cinema-Project/static/media/rubik.79b307f2.gif",
+    "static/media/satnhan.afff6010.jpg": "/Cinema-Project/static/media/satnhan.afff6010.jpg",
+    "static/media/slick-theme.css": "/Cinema-Project/static/media/slick.c94f7671.ttf",
+    "static/media/widownew.55a2f05c.jpg": "/Cinema-Project/static/media/widownew.55a2f05c.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b59ae99a.js",
+    "static/css/2.f28fb3b5.chunk.css",
+    "static/js/2.677926d0.chunk.js",
+    "static/css/main.e01e72df.chunk.css",
+    "static/js/main.e0c70cb7.chunk.js"
+  ]
+}
