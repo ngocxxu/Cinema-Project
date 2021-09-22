@@ -326,7 +326,7 @@ export default function CheckoutTab(props) {
             onClick={() => {
               localStorage.removeItem(USER_LOGIN);
               localStorage.removeItem(TOKEN);
-              history.push("/home");
+              history.push("/");
               //refresh trang lại
               window.location.reload();
             }}
