@@ -37,13 +37,14 @@ export default function Footer(props) {
               </span>
             </div>
           </div>
-          <div className="col-span-6 text-center md:text-left md:col-span-3">
-            <p className="pb-1 text-lg font-medium">Category</p>
+          <div className="col-span-6 text-left md:text-left md:col-span-3">
+            <p className="pb-1 text-lg font-medium">Sponsors</p>
             <div className="flex flex-wrap w-1/2 ">
               {arrHeThongRap.map((htr, index) => {
                 return (
                   <div className="m-1 " key={index}>
                     <img
+                    alt='...'
                       width="50"
                       src={htr.logo}
                       className="hover:text-violet-600 text-white"

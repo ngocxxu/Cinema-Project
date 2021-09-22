@@ -41,8 +41,8 @@ export default function Detail(props) {
         blur={20} // default blur value is 10px
         borderRadius={0} // default border radius value is 10px
       >
-        <div className="grid grid-cols-12 my-20">
-          <div className="col-span-5 col-start-3">
+        <div className="grid md:grid-cols-12 grid-cols-6  my-20">
+          <div className="md:col-span-5 col-span-7 md:col-start-3">
             <div className="grid grid-cols-3">
               <img
                 className="col-span-1"
@@ -119,7 +119,7 @@ export default function Detail(props) {
                               <div className="thong-tin-lich-chieu grid grid-cols-4">
                                 {cumRap.lichChieuPhim?.slice(0,12).map(
                                   (lichChieu, index) => {
-                                    return <NavLink to={`/checkout/${lichChieu.maLichChieu}`} key={index} className="col-span-1">
+                                    return <NavLink to={`/checkout/${lichChieu.maLichChieu}`} key={index} className="text-green-700 text-xl">
                                       {moment(lichChieu.ngayChieuGioChieu).format('hh:mm A')}
                                     </NavLink>;
                                   }
@@ -134,12 +134,12 @@ export default function Detail(props) {
                 </Tabs>
               </div>
             </TabPane>
-            <TabPane tab="Information" key="2">
+            {/* <TabPane tab="Information">
               Content of Tab Pane 2
             </TabPane>
-            <TabPane tab="Review" key="3">
+            <TabPane tab="Review" >
               Content of Tab Pane 3
-            </TabPane>
+            </TabPane> */}
           </Tabs>
         </div>
       </CustomCard>

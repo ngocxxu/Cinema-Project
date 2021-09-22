@@ -1,7 +1,14 @@
 .slick-prev:before, .slick-next:before {
 
-  color: gray !important;
-  font-size: 3rem !important;
+  color: rgba(128, 128, 128, 0.479) !important;
+  font-size: 2rem !important;
+  right: 0 !important;
+  /* top: 0px !important; */
+position: absolute !important;
+}
+
+.slick-arrow .slick-next{
+  right: 0px !important;
 }
 
 
@@ -17,3 +24,18 @@
 .none_active_Film {
   @apply bg-white text-gray-800;
 }
+
+  @media only screen and (max-width: 1024px){
+     iframe{
+      width: 500px;
+      height: 250px;
+      
+    }
+  }
+  @media only screen and (max-width: 640px){
+     iframe{
+      width: 360px;
+      height: 180px;
+      
+    }
+  }

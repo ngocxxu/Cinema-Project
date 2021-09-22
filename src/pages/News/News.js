@@ -4,6 +4,7 @@ import ModalHeader from "@material-tailwind/react/ModalHeader";
 import ModalBody from "@material-tailwind/react/ModalBody";
 import ModalFooter from "@material-tailwind/react/ModalFooter";
 import Button from "@material-tailwind/react/Button";
+import "@material-tailwind/react/tailwind.css";
 
 import black from "../../assets/img/black.jpg";
 import widownew from "../../assets/img/widownew.jpg";
@@ -22,8 +23,8 @@ export default function News(props) {
       {/* component */}
       {/* Create By Joker Banny */}
       <div className="min-h-screen bg-gray-800 flex justify-center items-center py-20">
-        <div className="md:px-4 md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 space-y-4 md:space-y-0">
-          <div className="max-w-sm bg-white px-6 pt-6 pb-2 rounded-xl shadow-lg transform hover:scale-105 transition duration-500">
+        <div className="md:px-4 md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 space-y-8 md:space-y-0">
+          <div className="max-w-sm  bg-white px-6 pt-6 pb-2 rounded-xl shadow-lg transform hover:scale-105 transition duration-500">
             <h3 className="mb-3 text-xl font-bold text-indigo-600">
               Black Widow
             </h3>
@@ -153,7 +154,7 @@ export default function News(props) {
             </ModalFooter>
           </Modal>
 
-          <div className="max-w-sm bg-white px-6 pt-6 pb-2 rounded-xl shadow-lg transform hover:scale-105 transition duration-500">
+          <div className="max-w-sm  bg-white px-6 pt-6 pb-2 rounded-xl shadow-lg transform hover:scale-105 transition duration-500">
             <h3 className="mb-3 text-xl font-bold text-indigo-600">Cruella</h3>
             <div className="relative">
               <img
@@ -282,7 +283,7 @@ export default function News(props) {
             </ModalFooter>
           </Modal>
 
-          <div className="max-w-sm bg-white px-6 pt-6 pb-2 rounded-xl shadow-lg transform hover:scale-105 transition duration-500">
+          <div className="max-w-sm  bg-white px-6 pt-6 pb-2 rounded-xl shadow-lg transform hover:scale-105 transition duration-500">
             <h3 className="mb-3 text-xl font-bold text-indigo-600">Candyman</h3>
             <div className="relative">
               <img
@@ -382,7 +383,7 @@ export default function News(props) {
                 if nobody hears about you.
               </p>
               <div className="flex justify-center">
-                <img width='700' src={candymannew} alt="candymannew"></img>
+                <img width="700" src={candymannew} alt="candymannew"></img>
               </div>
               <p className="mt-4 text-base leading-relaxed text-gray-600 font-normal">
                 The 1992 movie had two sequels and became a trilogy of sorts.

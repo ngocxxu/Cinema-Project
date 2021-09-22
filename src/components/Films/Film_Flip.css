@@ -37,3 +37,44 @@
   color: white;
   transform: rotateY(180deg);
 }
+
+.flip-img-front,.flip-img-back{
+  width: 300px;
+  height: 300px;
+}
+
+@media only screen and (max-width: 1536px){
+  .flip-card{
+    padding-left: 1rem;
+    padding-right: 1.5rem;
+  }
+}
+@media only screen and (max-width: 1280px){
+  .flip-card{
+    padding-left: 3rem;
+    padding-right: 3.5rem;
+  }
+}
+@media only screen and (max-width: 1024px){
+  .flip-card{
+    padding-left: 3rem;
+    padding-right: 3.5rem;
+  }
+  .flip-img-front,.flip-img-back,.flip-card{
+   width: 200px;
+   height: 200px;
+   
+ }
+}
+@media only screen and (max-width: 640px){
+  .flip-card{
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .flip-img-front,.flip-img-back,.flip-card{
+   width: 100px;
+   height: 100px;
+   
+ }
+}

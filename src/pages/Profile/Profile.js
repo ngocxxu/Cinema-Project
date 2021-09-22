@@ -73,23 +73,22 @@ export default function Profile(props) {
     return thongTinNguoiDungDefault.thongTinDatVe?.map((ticket, index) => {
       const seat = _.first(ticket.danhSachGhe);
       return (
-        <div className="flex flex-row mt-2">
+        <div className="md:flex flex-row mt-2">
           <div
-            className="flex w-full items-center justify-between bg-white
+            className="md:flex w-full items-center justify-between bg-white
   dark:bg-gray-800 px-8 py-6 border-l-4 border-green-500
   dark:border-green-300"
           >
-            {/* card */}
-            <div className="flex">
+            <div className="md:flex">
               <img
                 className="h-30 w-20 rounded object-cover"
                 src={ticket.hinhAnh}
                 alt="infamous"
               />
-              <div className="flex flex-col ml-6">
+              <div className="lg:flex flex-col ml-6">
                 <span className="text-lg font-bold">{ticket.tenPhim}</span>
-                <div className="mt-4 flex">
-                  <div className="flex ml-6">
+                <div className="mt-4 md:flex">
+                  <div className="md:flex ml-6">
                     <svg
                       className="h-5 w-5 fill-current
             dark:text-gray-300"
@@ -111,7 +110,7 @@ export default function Profile(props) {
                       {moment(ticket.ngayDat).format("hh:mm A")}
                     </span>
                   </div>
-                  <div className="flex ml-6">
+                  <div className="md:flex ml-6">
                     <svg
                       className="h-5 w-5 fill-current
             dark:text-gray-300"
@@ -147,8 +146,8 @@ export default function Profile(props) {
                     </span>
                   </div>
                 </div>
-                <div className="mt-4 flex">
-                  <div className="flex ml-6">
+                <div className="mt-4 lg:flex">
+                  <div className="md:flex ml-6">
                     <span
                       className=" text-sm text-gray-600
             dark:text-gray-300 capitalize"
@@ -162,9 +161,9 @@ export default function Profile(props) {
                       {seat.tenHeThongRap}
                     </span>
                   </div>
-                  <div className="flex ml-6">
+                  <div className="md:flex ml-6">
                     <span
-                      className="ml-2 text-sm text-gray-600
+                      className="md:ml-2 text-sm text-gray-600
             dark:text-gray-300 capitalize"
                     >
                       Theater:
@@ -176,7 +175,7 @@ export default function Profile(props) {
                       {seat.tenRap}
                     </span>
                   </div>
-                  <div className="flex ml-6">
+                  <div className="md:flex ml-6">
                     <span
                       className="ml-2 text-sm text-gray-600
             dark:text-gray-300 capitalize"
@@ -198,7 +197,7 @@ export default function Profile(props) {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col -mt-10 mr-20">
+            <div className="lg:flex lg:flex-col lg:mt-10 lg:mr-20 lg:ml-2 ml-12">
               <span
                 className="font-semibold text-green-500
       dark:text-green-300"
@@ -207,7 +206,7 @@ export default function Profile(props) {
               </span>
               <span
                 className="text-lg text-gray-700 dark:text-gray-400
-      mt-2"
+      md:mt-2"
               >
                 {ticket.giaVe * ticket.danhSachGhe.length} đ
               </span>
@@ -217,7 +216,7 @@ export default function Profile(props) {
             className="text-center flex flex-col items-center
   justify-center bg-white dark:bg-gray-800
   dark:text-gray-300 ml-1 px-12 cursor-pointer
-  hover:bg-blue-200 dark-hover:bg-blue-500 rounded-lg"
+  hover:bg-blue-200 dark-hover:bg-blue-500 rounded-lg lg:visible invisible"
           >
             <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24">
               <path
@@ -244,9 +243,9 @@ export default function Profile(props) {
 
   return (
     <div>
-      <div className="h-screen md:flex min-h-screen bg-gray-800">
+      <div className="md:h-screen md:flex min-h-screen bg-gray-800">
         <nav
-          className="w-80 pt-28 bg-white  select-none overflow-y-auto
+          className="md:w-80 pt-28 bg-white  select-none overflow-y-auto
 		transition duration-500 ease-in-out"
         >
           <div className="flex flex-col items-center ">
@@ -448,13 +447,13 @@ export default function Profile(props) {
 		duration-500 ease-in-out"
         >
           <div
-            className="px-24 py-12 text-gray-700 dark:text-gray-500 transition
+            className="md:px-18 lg:px-18 px-10 md:py-12 py-6 text-gray-700 dark:text-gray-500 transition
 			duration-500 ease-in-out"
           >
             <h2 className="text-4xl font-medium text-white">
               Booking Ticket History
             </h2>
-            <div className="mt-1 mb-4 flex items-center justify-between">
+            <div className="mt-1 mb-4 md:flex items-center justify-between">
               <span className="text-sm text-white">
                 <strong>Hope you enjoy day!</strong>
               </span>
@@ -474,7 +473,7 @@ export default function Profile(props) {
                   </svg>
                 </span>
                 <input
-                  className="bg-transparent focus:outline-none text-white"
+                  className="bg-transparent focus:outline-none text-white my-4 md-my-0"
                   placeholder="Search in activity"
                 />
               </div>
@@ -492,10 +491,10 @@ export default function Profile(props) {
                 </svg>
                 <span>Export</span>
               </button>
-              <div className="flex items-center select-none ">
+              <div className="md:flex items-center select-none my-4 md-my-0">
                 <span className="text-white">Filter</span>
                 <button
-                  className="ml-3 bg-white dark:bg-gray-600
+                  className="md:ml-3 ml-2 bg-white dark:bg-gray-600
 						dark:text-gray-400 rounded-full p-2 focus:outline-none
 						hover:text-pink-500 hover:bg-pink-300 transition
 						duration-500 ease-in-out "

@@ -3,7 +3,7 @@ import React, { Fragment, useState } from "react";
 import { Tabs, Radio, Space } from "antd";
 import { NavLink } from "react-router-dom";
 import moment from "moment";
-
+import './HomeMenu.css'
 const { TabPane } = Tabs;
 
 export default function HomeMenu(props) {
@@ -19,7 +19,7 @@ export default function HomeMenu(props) {
     return heThongRapChieu.map((heThongRap, index) => {
       return (
         <TabPane
-        className="text-white"
+        className="text-white tab-2"
           tab={
             <img
               src={heThongRap.logo}
@@ -29,10 +29,13 @@ export default function HomeMenu(props) {
           }
           key={index}
         >
-          <Tabs key={index} tabPosition={tabPosition}>
+          <Tabs
+          className="tab-3"
+           key={index} tabPosition={tabPosition}>
             {heThongRap.lstCumRap?.map((cumRap, index) => {
               return (
                 <TabPane
+                className="tab-4"
                   tab={
                     <div className="flex text-white mr-4" style={{ width: "300px" }}>
                       <img
@@ -50,8 +53,8 @@ export default function HomeMenu(props) {
                   {cumRap.danhSachPhim.map((phim, index) => {
                     return (
                       <Fragment key={index}>
-                        <div className="flex my-2 text-white">
-                          <div className="flex">
+                        <div className=" md:flex my-2 text-white tab-5">
+                          <div className="md:flex">
                             <img
                               onError={(e) => {
                                 e.target.onerror = null;
@@ -64,7 +67,7 @@ export default function HomeMenu(props) {
                             <div className="ml-2">
                               <h2 className="text-xl text-white">{phim.tenPhim}</h2>
                               <p>{cumRap.diaChi}</p>
-                              <div className="grid grid-cols-7 gap-4">
+                              <div className="text-center grid grid-cols-3 gap-4 md:grid-cols-5">
                                 {phim.lstLichChieuTheoPhim
                                   ?.slice(0, 14)
                                   .map((lichChieu, index) => {
@@ -99,8 +102,8 @@ export default function HomeMenu(props) {
 
   const { tabPosition } = state;
   return (
-    <div>
-      <Tabs tabPosition={tabPosition}>{renderHeThongRap()}</Tabs>
+    <div className="tab-main">
+      <Tabs className="tab-1" tabPosition={tabPosition}>{renderHeThongRap()}</Tabs>
     </div>
   );
 }

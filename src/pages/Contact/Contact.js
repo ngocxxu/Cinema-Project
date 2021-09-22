@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import emailjs from "emailjs-com";
 import { notificationFunction } from "../../template/HomeTemplate/Layout/Notify/Notification";
 
+
 export default function Contact(props) {
 
     function sendEmail  (e)  {
@@ -86,6 +87,9 @@ export default function Contact(props) {
               <div className="text-gray-700 mt-8">
                 Do you like it? Send me an{" "}
                 <span className="underline">email</span> instead.
+              </div>
+              <div className="text-gray-700 mt-4">
+                I will receive your message, if you send to me. I'm sure! Try it.
               </div>
             </div>
             <div className="mt-4 text-center">

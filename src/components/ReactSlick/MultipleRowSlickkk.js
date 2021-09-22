@@ -30,8 +30,8 @@ function SamplePrevArrow(props) {
   const { className, style, onClick } = props;
   return (
     <div
-      className={`${className} ${styleSlick["slick-prev"]}`}
-      style={{ ...style, display: "block" }}
+      className={`${className} ${styleSlick["slick-next"]}`}
+      style={{ ...style, display: "block", right:'0px' }}
       onClick={onClick}
     />
   );
@@ -40,20 +40,19 @@ function SamplePrevArrow(props) {
 const MultipleRows = (props) => {
   const { showModal } = useSelector((state) => state.CarouselReducer);
 
-  const {thongTinPhim} = useSelector(state => state.QuanLyPhimReducer)
+  const { thongTinPhim } = useSelector((state) => state.QuanLyPhimReducer);
   const dispatch = useDispatch();
-  console.log('thongTinPhim',thongTinPhim)
+  console.log("thongTinPhim", thongTinPhim);
 
   const { dangChieu, sapChieu } = useSelector(
     (state) => state.QuanLyPhimReducer
   );
 
   // let activeClassDC = dangChieu === true ? "active_Film" : "none_active_Film";
-  // let activeClassSC = sapChieu === true ? "none_active_Film" : "active_Film";
+  // let activeClassSC = sapChieu === true ? "active_Film" : "none_active_Film";
 
   const renderFilms = () => {
     // console.log("arrFilm", props.arrFilm);
-
 
     //lấy khoảng 12phim show ra thui
     // props.arrFilm.slice(0,12).map((item, index)
@@ -67,7 +66,7 @@ const MultipleRows = (props) => {
     });
   };
   const settings = {
-    className: "center variable-width p-10",
+    className: "center p-5 ",
     centerMode: true,
     infinite: true,
     // centerPadding: "45px",
@@ -76,8 +75,8 @@ const MultipleRows = (props) => {
     rows: 3,
     slidesPerRow: 2,
     nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
-    variableWidth: true
+    prevArrow: <SamplePrevArrow />
+    // variableWidth: true
   };
 
   return (
@@ -131,7 +130,7 @@ const MultipleRows = (props) => {
           Trailer
         </ModalHeader>
         <ModalBody>
-          <div>
+          <div className="video max-w-full">
             <iframe
               width="720"
               height="360"

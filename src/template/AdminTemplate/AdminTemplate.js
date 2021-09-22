@@ -54,7 +54,7 @@ export default function AdminTemplate(props) {
             }}
           >
             {" "}
-            <div className="w-16 h-16 rounded-full bg-yellow-500 flex justify-center items-center">
+            <div className="w-16 h-16 rounded-full bg-yellow-500 flex justify-center items-center capitalize text-white text-2xl mr-4">
               {userLogin.taiKhoan.substr(0, 1)}
             </div>
             {/* Hello, {userLogin.taiKhoan} */}

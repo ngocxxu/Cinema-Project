@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   datGheAction,
   datVeAction,
-  layChiTietPhongVeAction,
+  layChiTietPhongVeAction
 } from "../../redux/actions/QuanLyDatVeAction";
 import style from "./Checkout.module.css";
 import "./Checkout.css";
@@ -13,13 +13,13 @@ import {
   UserOutlined,
   SmileOutlined,
   WarningOutlined,
-  HomeOutlined,
+  HomeOutlined
 } from "@ant-design/icons";
 import {
   CHANGE_TAB_POSITION,
   CHUYEN_TAB,
   DAT_GHE,
-  DAT_VE,
+  DAT_VE
 } from "../../redux/const/settingConst";
 import _ from "lodash";
 import { ThongTinDatVe } from "../../_core/models/ThongTinDatVe";
@@ -164,7 +164,7 @@ function Checkout(props) {
             <div className={`${style["trapezoid"]}`}>
               <div className="mt-3 text-center text-gray-900">Screen</div>
             </div>
-            <div>{renderSeats()}</div>
+            <div className="mt-20">{renderSeats()}</div>
           </div>
           <div className="mt-5 flex justify-center ">
             <table
@@ -172,7 +172,7 @@ function Checkout(props) {
               style={{ border: "none" }}
             >
               <thead className="bg-gray-50 p-5">
-                <tr>
+                <tr className='text-left pl-6'>
                   <th>Unseat</th>
                   <th>Seating</th>
                   <th>Seat VIP</th>
@@ -181,35 +181,35 @@ function Checkout(props) {
                   <th>Someone Seating</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200 bg-white">
+              <tbody className=" bg-white">
                 <tr>
-                  <td>
-                    <button className="ghe text-center">
+                  <td className=''>
+                    <button className=" ghe text-center ">
                       <SmileOutlined />
                     </button>
                   </td>
-                  <td>
-                    <button className="ghe gheDangDat text-center">
+                  <td className=''>
+                    <button className="ghe gheDangDat text-center ">
                       <SmileOutlined />
                     </button>
                   </td>
-                  <td>
-                    <button className="ghe gheVip text-center">
+                  <td className=''>
+                    <button className="ghe gheVip text-center ">
                       <SmileOutlined />
                     </button>
                   </td>
-                  <td>
-                    <button className="ghe gheDaDat text-center">
+                  <td className=''>
+                    <button className="ghe gheDaDat text-center ">
                       <SmileOutlined />
                     </button>
                   </td>
-                  <td>
-                    <button className="ghe gheDaDuocDat text-center">
+                  <td className=''>
+                    <button className="ghe gheDaDuocDat text-center ">
                       <SmileOutlined />
                     </button>
                   </td>
-                  <td>
-                    <button className="ghe gheKhachDat text-center">
+                  <td className=''>
+                    <button className="ghe gheKhachDat text-center ">
                       <SmileOutlined />
                     </button>
                   </td>
@@ -300,11 +300,10 @@ const { TabPane } = Tabs;
 
 function callback(key) {}
 
-export default function CheckoutTab (props) {
+export default function CheckoutTab(props) {
   const { tabActive } = useSelector((state) => state.QuanLyDatVeReducer);
   const dispatch = useDispatch();
   const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
-
 
   const operations = (
     <Fragment>
@@ -317,18 +316,23 @@ export default function CheckoutTab (props) {
             }}
           >
             {" "}
-            <div className="w-16 h-16 rounded-full bg-yellow-500 flex justify-center items-center">
+            <div className="w-16 h-16 rounded-full bg-yellow-500 flex justify-center items-center capitalize text-white text-2xl mr-4">
               {userLogin.taiKhoan.substr(0, 1)}
             </div>
-            Hello, {userLogin.taiKhoan}
+            {/* <div className='text-xl'>Hello, {userLogin.taiKhoan}</div> */}
           </button>
-          <button className="text-red-400" onClick={() => {
-            localStorage.removeItem(USER_LOGIN);
-            localStorage.removeItem(TOKEN);
-            history.push("/home");
-            //refresh trang lại
-            window.location.reload();
-          }}>Sign out</button>
+          <button
+            className="text-red-400"
+            onClick={() => {
+              localStorage.removeItem(USER_LOGIN);
+              localStorage.removeItem(TOKEN);
+              history.push("/home");
+              //refresh trang lại
+              window.location.reload();
+            }}
+          >
+            Sign out
+          </button>
         </Fragment>
       ) : (
         ""
@@ -338,13 +342,13 @@ export default function CheckoutTab (props) {
 
   //reset tabpane lại thì khi chuyển trang từ Home
   useEffect(() => {
-    return ()=>{
+    return () => {
       dispatch({
         type: CHANGE_TAB_POSITION,
-        number: '1',
-      })
-    }
-  },[])
+        number: "1"
+      });
+    };
+  }, []);
 
   return (
     <div className="p-5">
@@ -356,7 +360,7 @@ export default function CheckoutTab (props) {
         onChange={(key) => {
           dispatch({
             type: CHANGE_TAB_POSITION,
-            number: key,
+            number: key
           });
         }}
       >
@@ -366,8 +370,14 @@ export default function CheckoutTab (props) {
         <TabPane tab="02 BOOKING TICKET RESULT" key="2">
           <KetQuaDatVe {...props}></KetQuaDatVe>
         </TabPane>
-        <TabPane tab={<NavLink className='mx-auto text-4xl' to='/'><HomeOutlined /></NavLink>} key="0">
-        </TabPane>
+        <TabPane
+          tab={
+            <NavLink className=" text-4xl" to="/">
+              <HomeOutlined className=' mb-6' />
+            </NavLink>
+          }
+          key="0"
+        ></TabPane>
       </Tabs>
     </div>
   );
