@@ -88,7 +88,7 @@ export default function Header(props) {
             aria-label="Back to homepage"
             className="flex items-center p-2 text-white"
           >
-            <p  className="text-lg font-bold leading-relaxed inline-block mr-4 mt-3 whitespace-no-wrap uppercase text-white" >ZUPI CINEMA</p>
+            <p  className="text-lg font-bold leading-relaxed inline-block whitespace-no-wrap uppercase text-white" >ZUPI CINEMA</p>
           </NavLink>
 
           <NavbarToggler
@@ -115,7 +115,6 @@ export default function Header(props) {
               onClick={() => {
                 window.scrollTo(0, 0);
               }}
-              activeClassName="border-b-2 border-white"
               // activeClassName="active border-b-2 border-white"
               to="/news"
               href="#"
@@ -127,7 +126,6 @@ export default function Header(props) {
               onClick={() => {
                 window.scrollTo(0, 0);
               }}
-              activeClassName="border-b-2 border-white"
               to="/contact"
               href="#"
               className="flex items-center px-4 lg:py-0 py-4 border-b-2 border-transparent text-white hover:bg-indigo-700 rounded hover:text-white"
@@ -138,7 +136,6 @@ export default function Header(props) {
               onClick={() => {
                 window.scrollTo(0, 0);
               }}
-              activeClassName="border-b-2 border-white"
               to="/profile"
               href="#"
               className="flex items-center px-4 lg:py-0 py-4 border-b-2 border-transparent text-white hover:bg-indigo-700 rounded hover:text-white"
@@ -149,7 +146,6 @@ export default function Header(props) {
               onClick={() => {
                 window.scrollTo(0, 0);
               }}
-              activeClassName="border-b-2 border-white"
               to="/admin"
               href="#"
               className="flex items-center px-4 lg:py-0 py-4 border-b-2 border-transparent text-white hover:bg-indigo-700 rounded hover:text-white"
